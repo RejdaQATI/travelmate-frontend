@@ -26,15 +26,15 @@ const Home = () => {
         <HeroImage />
         <SearchBar onSearch={handleSearch} />
 
-        {/* Section des villes avec sélection */}
-        <CityList onCitySelect={setSelectedCity} />
-        <CityDetails city={selectedCity} />
 
         {/* Autres sections */}
         <PopularTrips />
         <MaldivesSection />
         <TripsSlider />
         <AlaskaSection />
+                        {/* Section des villes avec sélection */}
+                        <CityList onCitySelect={setSelectedCity} />
+        <CityDetails city={selectedCity} />
         <AutumnDestinations />
       </main>
       <Footer />

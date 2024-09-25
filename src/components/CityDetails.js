@@ -4,7 +4,7 @@ const CityDetails = ({ city }) => {
   if (!city) return null; // Si aucune ville n'est sélectionnée, on n'affiche rien
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto mb-10">
+    <div className="relative w-full max-w-6xl mx-auto mb-4">
       <img
         src={`http://localhost:8000/${city.image}`}
         alt={city.name}
@@ -12,7 +12,9 @@ const CityDetails = ({ city }) => {
       />
 
       {/* Boîte blanche légèrement remontée avec contenu en flex */}
-      <div className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-10/12 md:w-9/12 bg-white p-6 shadow-lg rounded-lg mb-4">
+      <div className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-10/12 md:w-9/12 bg-white p-6 shadow-lg rounded-lg mb-4"
+      style={{ backgroundColor: '#eeebeb' }} // Cream background
+      >
         <div className="flex items-center justify-between">
           {/* Texte à gauche */}
           <div className="text-left w-2/4 ml-4"> {/* Paragraphe moins large */}

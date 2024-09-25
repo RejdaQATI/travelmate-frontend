@@ -15,7 +15,7 @@ const HeroImage = () => {
 
       {/* Optional overlay text */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <h1 className="text-5xl font-bold text-white">Fais tes valises, l'aventure commence !</h1>
+        <h1 className="text-5xl font-bold text-white">Faites vos valises, l'aventure commence !</h1>
       </div>
     </div>
   );
