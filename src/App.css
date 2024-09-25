@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+ 
 .App {
   text-align: center;
 }
@@ -34,5 +38,35 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+
+/* CSS for animated car image */
+.car-animation {
+  position: absolute;
+  width: 15%; /* Set the width of the image */
+  bottom: 5%; /* Position the image at the bottom of the page */
+  left: 5%; /* Adjust the horizontal positioning as needed */
+  z-index: 3;
+  animation: drive 20s infinite linear;
+  background-image: url('./images/car.png'); /* Replace with the car image URL */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.car-animation:after {
+  display: block;
+  padding-top: 20%; /* Adjust based on the car image aspect ratio */
+  content: '';
+}
+
+@keyframes drive {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100vw); /* Move the car across the screen */
   }
 }
