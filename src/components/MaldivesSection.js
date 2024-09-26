@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../axiosConfig';
+import { Link } from 'react-router-dom'; // Importer Link pour la navigation
 
 const MaldivesSection = () => {
   const [trips, setTrips] = useState([]);
@@ -46,7 +47,8 @@ const MaldivesSection = () => {
           <div className="flex space-x-4 mb-4">
             {trips.length > 0 ? (
               trips.map(trip => (
-                <div key={trip.id} className="rounded-lg shadow-lg overflow-hidden w-[150px] md:w-[180px]">
+                <Link to={`/trips/${trip.id}`} key={trip.id} className="rounded-lg shadow-lg overflow-hidden w-[150px] md:w-[180px]">
+                  {/* Image of the trip */}
                   <img
                     src={`http://localhost:8000/${trip.image}`} // Replace with the correct image path from your API
                     alt={trip.title}
@@ -55,7 +57,7 @@ const MaldivesSection = () => {
                   <div className="p-1 text-center">
                     <p className="text-lg font-semibold text-white">{trip.title}</p>
                   </div>
-                </div>
+                </Link>
               ))
             ) : (
               <p className="text-white">Aucun voyage disponible pour les Maldives.</p>

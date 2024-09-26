@@ -11,3 +11,13 @@ body {
     font-family: Arial, sans-serif; /* Optionnel pour un rendu uniforme */
   }
   
+  /* TripDatePicker.css */
+
+/* Appliquer une couleur grise pour la période sélectionnée */
+.selected-range {
+    background-color: #c0c0c0 !important; /* Couleur grise */
+    color: white !important;
+  }
+  
+  /* Style du bouton "Réserver maintenant" déjà défini dans le code */
+  
