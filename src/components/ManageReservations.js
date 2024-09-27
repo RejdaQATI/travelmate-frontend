@@ -29,34 +29,48 @@ const ManageReservations = () => {
 
   // Fonction pour sauvegarder les modifications
   const handleSave = (id) => {
-    const updatedFields = modifiedReservations[id];
+    const updatedFields = modifiedReservations[id] || {};
 
-    if (updatedFields) {
-      api.put(`/reservations/${id}`, updatedFields)
-        .then(response => {
-          // Mettre à jour la réservation dans l'état après la réponse de l'API
-          setReservations(reservations.map(reservation =>
-            reservation.id === id ? { ...reservation, ...response.data.reservation } : reservation
-          ));
+    // Remplir les champs non modifiés avec les valeurs actuelles
+    const currentReservation = reservations.find(reservation => reservation.id === id);
+    const payload = {
+      status: updatedFields.status || currentReservation.status,
+      payment_status: updatedFields.payment_status || currentReservation.payment_status,
+    };
 
-          // Passer en mode "non-édition" après la sauvegarde
-          setIsEditing(prev => ({ ...prev, [id]: false }));
+    api.put(`/reservations/${id}`, payload)
+      .then(response => {
+        // Mettre à jour la réservation dans l'état après la réponse de l'API
+        setReservations(reservations.map(reservation =>
+          reservation.id === id ? { ...reservation, ...response.data.reservation } : reservation
+        ));
 
-          // Effacer les changements locaux une fois sauvegardés
-          setModifiedReservations(prev => {
-            const updated = { ...prev };
-            delete updated[id];
-            return updated;
-          });
-        })
-        .catch(error => {
-          console.error('Erreur lors de la mise à jour de la réservation', error);
+        // Passer en mode "non-édition" après la sauvegarde
+        setIsEditing(prev => ({ ...prev, [id]: false }));
+
+        // Effacer les changements locaux une fois sauvegardés
+        setModifiedReservations(prev => {
+          const updated = { ...prev };
+          delete updated[id];
+          return updated;
         });
-    }
+      })
+      .catch(error => {
+        console.error('Erreur lors de la mise à jour de la réservation', error);
+      });
   };
 
   // Fonction pour activer/désactiver le mode édition
   const handleEdit = (id) => {
+    // Initialiser les champs de modification avec les valeurs actuelles si nécessaire
+    setModifiedReservations(prev => ({
+      ...prev,
+      [id]: {
+        status: reservations.find(res => res.id === id).status,
+        payment_status: reservations.find(res => res.id === id).payment_status,
+      },
+    }));
+
     setIsEditing(prev => ({ ...prev, [id]: true }));
   };
 
