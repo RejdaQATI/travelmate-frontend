@@ -74,6 +74,20 @@ const ManageReservations = () => {
     setIsEditing(prev => ({ ...prev, [id]: true }));
   };
 
+  // Fonction pour supprimer une réservation
+  const handleDelete = (id) => {
+    if (window.confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')) {
+      api.delete(`/reservations/${id}`)
+        .then(() => {
+          // Supprimer la réservation de l'état
+          setReservations(reservations.filter(reservation => reservation.id !== id));
+        })
+        .catch(error => {
+          console.error('Erreur lors de la suppression de la réservation', error);
+        });
+    }
+  };
+
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6">Liste des réservations</h2>
@@ -133,7 +147,7 @@ const ManageReservations = () => {
                 )}
               </td>
 
-              {/* Bouton Save / Edit */}
+              {/* Bouton Save / Edit et Supprimer */}
               <td className="border px-4 py-2">
                 {isEditing[reservation.id] ? (
                   <button
@@ -143,12 +157,20 @@ const ManageReservations = () => {
                     Sauvegarder
                   </button>
                 ) : (
-                  <button
-                    className="bg-gray-500 text-white px-4 py-2 rounded-lg"
-                    onClick={() => handleEdit(reservation.id)}
-                  >
-                    Edit
-                  </button>
+                  <>
+                    <button
+                      className="bg-gray-500 text-white px-4 py-2 rounded-lg mr-2"
+                      onClick={() => handleEdit(reservation.id)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="bg-red-500 text-white px-4 py-2 rounded-lg"
+                      onClick={() => handleDelete(reservation.id)}
+                    >
+                      &#10005; {/* Unicode pour la croix */}
+                    </button>
+                  </>
                 )}
               </td>
             </tr>

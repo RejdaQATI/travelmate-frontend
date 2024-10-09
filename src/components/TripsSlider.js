@@ -21,47 +21,74 @@ const TripsSlider = () => {
   return (
 <div className="relative container mx-auto py-8">
   <div className="text-left mb-6">
+    {/* h1 Title with responsive size */}
     <h1 className="text-4xl font-bold">Destinations tendance</h1>
-    <h2 className="text-md text-gray-600 mt-2 max-w-md">Explorez notre sélection des voyages les plus prisés et laissez-vous inspirer pour trouver votre prochaine aventure inoubliable.</h2>
+    <h2 className="text-md text-gray-600 mt-2 max-w-md">
+      Explorez notre sélection des voyages les plus prisés et laissez-vous inspirer pour trouver votre prochaine aventure inoubliable.
+    </h2>
   </div>
-      <div className="absolute right-0 top-0 flex items-center space-x-2 pr-4 pt-10 z-10 mt-8">
-        <div className="custom-prev-button bg-yellow-400 rounded-full w-10 h-10 flex items-center justify-center shadow-lg cursor-pointer">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5 text-white">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </div>
-        <div className="custom-next-button bg-yellow-400 rounded-full w-10 h-10 flex items-center justify-center shadow-lg cursor-pointer">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5 text-white">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </div>
-      </div>
 
-      <Swiper
-        spaceBetween={20}
-        slidesPerView={5} 
-        loop={true} 
-        navigation={{
-          prevEl: '.custom-prev-button',
-          nextEl: '.custom-next-button',
-        }} 
-        modules={[Navigation]} 
-      >
-        {trips.map(trip => (
-          <SwiperSlide key={trip.id}>
-            <div className="bg-white rounded-lg overflow-hidden">
-              <img
-                src={`http://localhost:8000/${trip.image}`}
-                alt={trip.title}
-                className="w-full h-56 object-cover rounded-lg"
-              />
-              <p className="text-center p-4 text-lg font-semibold">{trip.title}</p>
-              <p className="text-center pb-4 text-sm text-gray-500">À partir de {trip.price} €</p>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+  {/* Navigation buttons */}
+  <div className="absolute right-0 top-0 flex items-center space-x-2 pr-4 pt-10 z-10 mt-8 hidden md:flex"> {/* Hide on small screens */}
+    {/* Prev Button */}
+    <div className="custom-prev-button bg-yellow-400 rounded-full w-10 h-10 flex items-center justify-center shadow-lg cursor-pointer">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5 text-white">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+      </svg>
     </div>
+    {/* Next Button */}
+    <div className="custom-next-button bg-yellow-400 rounded-full w-10 h-10 flex items-center justify-center shadow-lg cursor-pointer">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5 text-white">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+      </svg>
+    </div>
+  </div>
+
+  <Swiper
+    spaceBetween={20}
+    slidesPerView={5} // Nombre de slides par vue par défaut (desktop)
+    loop={true}
+    navigation={{
+      prevEl: '.custom-prev-button',
+      nextEl: '.custom-next-button',
+    }}
+    modules={[Navigation]}
+    breakpoints={{
+      375: { // Pour les petits écrans, désactiver les flèches et rendre scrollable
+        slidesPerView: 2, 
+        spaceBetween: 5,
+
+      },
+      500: { // Pour les écrans de 640px et plus
+        slidesPerView: 3,
+        spaceBetween: 10,
+      },
+      1024: { // Pour les écrans de 1024px et plus (tablettes)
+        slidesPerView: 3,
+        spaceBetween: 15,
+      },
+      1280: { // Pour les écrans de 1280px et plus (desktop)
+        slidesPerView: 5,
+        spaceBetween: 20,
+      }
+    }}
+  >
+    {trips.map(trip => (
+      <SwiperSlide key={trip.id}>
+        <div className="bg-white rounded-lg overflow-hidden w-[180px] md:w-[240px]"> {/* Default small screen width */}
+          <img
+            src={`http://localhost:8000/${trip.image}`}
+            alt={trip.title}
+            className="w-full h-40 md:h-56 object-cover rounded-lg"
+          />
+          <p className="text-center p-4 text-lg font-semibold">{trip.title}</p>
+          <p className="text-center pb-4 text-sm text-gray-500">À partir de {trip.price} €</p>
+        </div>
+      </SwiperSlide>
+    ))}
+  </Swiper>
+</div>
+
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import api from '../axiosConfig';
 import '../assets/css/LoginForm.css'; 
+import { useNavigate } from 'react-router-dom';
 import planeImage from '../assets/images/travelmate-plane.png'; 
 import cloudImage from '../assets/images/clouds.png'; 
 import cloud2Image from '../assets/images/clouds-2.png'; 
@@ -8,6 +9,7 @@ import cloud2Image from '../assets/images/clouds-2.png';
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,7 +17,7 @@ const LoginForm = () => {
     api.post('/login', { email, password })
       .then(response => {
         localStorage.setItem('token', response.data.token);
-        alert('Connexion réussie !');
+        navigate('/');
       })
       .catch(error => {
         alert('Erreur lors de la connexion.');
@@ -61,7 +63,7 @@ const LoginForm = () => {
           <div className="flex items-center justify-between">
             <button 
               type="submit" 
-              className="w-full bg-gray-500 text-white font-semibold py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+              className="w-full bg-yellow-500 text-white font-semibold py-2 rounded-lg hover:bg-yellow-600 transition duration-300"
             >
               Se connecter
             </button>
@@ -72,19 +74,16 @@ const LoginForm = () => {
         </form>
       </div>
 
-      {/* First cloud */}
       <div 
         className="cloud-animation" 
         style={{ backgroundImage: `url(${cloudImage})` }}
       ></div>
 
-      {/* Second cloud */}
       <div 
         className="cloud-animation cloud-animation-2" 
         style={{ backgroundImage: `url(${cloud2Image})` }}
       ></div>
 
-      {/* Animated Plane */}
       <div 
         className="plane-animation" 
         style={{ backgroundImage: `url(${planeImage})` }}
@@ -94,3 +93,6 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
+
+

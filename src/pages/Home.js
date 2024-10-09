@@ -8,12 +8,12 @@ import PopularTrips from '../components/PopularTrips';
 import TripsSlider from '../components/TripsSlider'; 
 import MaldivesSection from '../components/MaldivesSection'; 
 import AutumnDestinations from '../components/AutumnDestinations'; 
-import CityList from '../components/CityList'; // Importer la liste des villes
-import CityDetails from '../components/CityDetails'; // Importer les détails de la ville
+import CityList from '../components/CityList'; 
+import CityDetails from '../components/CityDetails'; 
 
 const Home = () => {
   const [searchFilters, setSearchFilters] = useState(null);
-  const [selectedCity, setSelectedCity] = useState(null); // Stocker la ville sélectionnée
+  const [selectedCity, setSelectedCity] = useState(null); 
 
   const handleSearch = (filters) => {
     setSearchFilters(filters);
@@ -25,15 +25,11 @@ const Home = () => {
       <main>
         <HeroImage />
         <SearchBar onSearch={handleSearch} />
-
-
-        {/* Autres sections */}
         <PopularTrips />
         <MaldivesSection />
         <TripsSlider />
         <AlaskaSection />
-                        {/* Section des villes avec sélection */}
-                        <CityList onCitySelect={setSelectedCity} />
+        <CityList onCitySelect={setSelectedCity} />
         <CityDetails city={selectedCity} />
         <AutumnDestinations />
       </main>

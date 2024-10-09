@@ -29,7 +29,7 @@
 .cloud-animation {
     position: absolute;
     width: 60%; 
-    top: 5%;
+    top: 3%;
     z-index: 1; 
     animation: clouds 100s infinite linear;
     animation-delay: -20s;
@@ -46,7 +46,7 @@
 
 .cloud-animation-2 {
     opacity: 1;
-    top: 12%; 
+    top: 6%; 
     animation-delay: -55s;
     animation-duration: 120s; 
 }

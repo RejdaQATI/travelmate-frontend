@@ -3,21 +3,33 @@
 @tailwind utilities;
 
 
-/* index.css ou App.css */
 body {
-    background-color: #f4f3f3; /* Couleur crème */
+    background-color: #f4f3f3; 
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif; /* Optionnel pour un rendu uniforme */
+    font-family: Arial, sans-serif; 
   }
-  
-  /* TripDatePicker.css */
 
-/* Appliquer une couleur grise pour la période sélectionnée */
+
 .selected-range {
-    background-color: #c0c0c0 !important; /* Couleur grise */
+    background-color: #c0c0c0 !important; 
     color: white !important;
   }
   
-  /* Style du bouton "Réserver maintenant" déjà défini dans le code */
+
+  @media (max-width: 414px) {
+    .swiper-slide-custom {
+      margin-left: -10px !important;
+      margin-right: -10px !important;
+      padding-left: 12px !important;
+      padding-right: 2.5px !important;
+
+    }
+  }
   
+
+
+/* Stylisation normale du logo, en position relative */
+.logo {
+  height: 60px;  /* Ajuste la taille du logo */
+}

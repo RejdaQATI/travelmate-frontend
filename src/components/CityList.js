@@ -30,22 +30,22 @@ const CityList = ({ onCitySelect }) => {
   };
 
   return (
-    <div className="text-center mb-6 mt-10">
+    <div className="text-center mb-6 mt-10 px-4">
       {/* Nouveau H1 et H2 */}
-      <h1 className="text-4xl font-bold text-center mb-4">
+      <h1 className="text-3xl sm:text-4xl font-bold text-center mb-4">
         Choisissez votre prochaine destination
       </h1>
-      <h2 className="text-lg text-gray-600 mb-6">
+      <h2 className="text-md sm:text-lg text-gray-600 mb-6">
         Trouvez le voyage qui vous correspond et explorez de nouveaux horizons
       </h2>
 
-      {/* Liste des boutons pour les villes */}
-      <div className="flex justify-center space-x-6 my-8">
+      {/* Liste des boutons pour les villes avec scroll horizontal */}
+      <div className="flex overflow-x-auto space-x-2 justify-center sm:space-x-6 my-8"> {/* Ajout du scroll horizontal */}
         {cities.map(city => (
           <button
             key={city.id}
             onClick={() => handleCityClick(city)}
-            className={`bg-cream border border-green-500 text-black-500 p-3 px-6 rounded-full shadow hover:bg-green-100 transition duration-300 ${selectedCity && selectedCity.id === city.id ? 'bg-green-100' : ''}`} // Ajouter une classe si la ville est sélectionnée
+            className={`bg-cream border border-green-500 text-black-500 p-2 sm:p-3 px-4 sm:px-6 text-xs sm:text-base rounded-full shadow hover:bg-green-100 transition duration-300 ${selectedCity && selectedCity.id === city.id ? 'bg-green-100' : ''}`}
           >
             {city.name}
           </button>

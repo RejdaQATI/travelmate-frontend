@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../axiosConfig';
-import MesReservations from './MesReservations'; // Assurez-vous que MesReservations est importé
+import MesReservations from './MesReservations'; 
 
 const UserProfile = () => {
   const [user, setUser] = useState({
@@ -20,7 +20,7 @@ const UserProfile = () => {
     confirmPassword: ''
   });
 
-  const [showBookingHistory, setShowBookingHistory] = useState(false); // Ajout du state pour afficher ou non les réservations
+  const [showBookingHistory, setShowBookingHistory] = useState(false); 
 
   useEffect(() => {
     api.get('/profile')
@@ -59,20 +59,26 @@ const UserProfile = () => {
   };
 
   const toggleBookingHistory = () => {
-    setShowBookingHistory(!showBookingHistory); // Bascule entre informations et historique des réservations
+    setShowBookingHistory(!showBookingHistory); 
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center pt-12">
+    <div 
+      className="min-h-screen bg-cover bg-center flex justify-center pt-12 relative" 
+      style={{
+        backgroundImage: "url('../images/1321981.jpeg')", 
+        boxShadow: 'inset 0 0 0 2000px rgba(0, 0, 0, 0.3)'  // Ajoute un overlay sombre sur l'image
+      }}
+    >
       <div className="max-w-6xl w-full p-4">
-        <div className="bg-white shadow-lg rounded-lg p-8 flex">
+        <div className="bg-white bg-opacity-80 shadow-lg rounded-lg p-8 flex flex-col md:flex-row">  {/* Ajusté pour responsive */}
           {/* Sidebar */}
-          <div className="w-1/4 bg-white p-6 shadow-lg">
+          <div className="w-full md:w-1/4 bg-white bg-opacity-70 p-6 shadow-lg mb-6 md:mb-0"> {/* Responsive Sidebar */}
             <div className="text-center mb-6">
               <img 
                 className="w-24 h-24 rounded-full mx-auto mb-4" 
                 src={user.avatar || "https://via.placeholder.com/150"} 
-                alt="User Avatar" 
+                alt="Avatar de l'utilisateur" 
               />
               <h3 className="text-lg font-semibold">{user.name}</h3>
               <p className="text-gray-600">{user.dateOfBirth}</p>
@@ -81,34 +87,34 @@ const UserProfile = () => {
               <a 
                 href="#" 
                 onClick={() => setShowBookingHistory(false)} // Afficher le profil
-                className="block text-lg text-gray-800 hover:text-blue-600"
+                className={`block text-lg text-gray-800 hover:text-gray-600 px-4 py-2 rounded-lg transition-all duration-300 ${!showBookingHistory ? 'bg-gray-200 border-gray-500' : ''}`} // Active state for Profile Informations
               >
-                Profile Informations
+                Informations du Profil
               </a>
               <a 
                 href="#" 
                 onClick={toggleBookingHistory} // Afficher l'historique des réservations
-                className="block text-lg text-gray-800 hover:text-blue-600"
+                className={`block text-lg text-gray-800 hover:text-gray-600 px-4 py-2 rounded-lg transition-all duration-300 ${showBookingHistory ? 'bg-gray-200 border-gray-500' : ''}`} // Active state for Booking History
               >
-                Booking History
+                Réservations
               </a>
             </div>
           </div>
 
           {/* Main Content */}
-          <div className="w-3/4 p-8">
+          <div className="w-full md:w-3/4 p-8">
             {showBookingHistory ? (
-              <div className="bg-white rounded-lg p-8 mb-6">
-                <h2 className="text-3xl font-semibold mb-6">Booking History</h2>
+              <div className="bg-white bg-opacity-80 rounded-lg p-8 mb-6 shadow-lg">
+                <h2 className="text-3xl font-semibold mb-6">Historique des Réservations</h2>
                 <MesReservations /> {/* Intégrer le composant MesReservations ici */}
               </div>
             ) : (
               <>
-                <div className="bg-white rounded-lg p-8 mb-6">
-                  <h2 className="text-3xl font-semibold mb-6">Personal Information</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
+                <div className="bg-white bg-opacity-80 rounded-lg p-8 mb-6 shadow-lg">
+                  <h2 className="text-3xl font-semibold mb-6">Informations Personnelles</h2>
+                  <div className="grid grid-cols-1 gap-6"> {/* Mise à jour responsive */}
                     <div>
-                      <label className="block text-gray-700 mb-1">Name</label>
+                      <label className="block text-gray-700 mb-1">Nom</label>
                       <input
                         type="text"
                         name="name"
@@ -118,7 +124,7 @@ const UserProfile = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-gray-700 mb-1">Date Of Birth</label>
+                      <label className="block text-gray-700 mb-1">Date de Naissance</label>
                       <input
                         type="date"
                         name="dateOfBirth"
@@ -128,7 +134,7 @@ const UserProfile = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-gray-700 mb-1">Phone</label>
+                      <label className="block text-gray-700 mb-1">Téléphone</label>
                       <input
                         type="tel"
                         name="phone"
@@ -138,7 +144,7 @@ const UserProfile = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-gray-700 mb-1">Location</label>
+                      <label className="block text-gray-700 mb-1">Localisation</label>
                       <input
                         type="text"
                         name="location"
@@ -151,16 +157,16 @@ const UserProfile = () => {
                 </div>
                 <button
                   onClick={handleUpdate}
-                  className="mb-8 ml-8 w-60 bg-gray-500 text-white py-4 px-4 "
+                  className="mb-8 w-full md:w-60 bg-yellow-500 text-white py-4 px-4 "
                 >
-                  Update Personal Info
+                  Mettre à jour
                 </button>
 
-                <div className="bg-white rounded-lg p-8">
-                  <h2 className="text-3xl font-semibold mb-6">Security</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
+                <div className="bg-white bg-opacity-80 rounded-lg p-8 shadow-lg">
+                  <h2 className="text-3xl font-semibold mb-6">Sécurité</h2>
+                  <div className="grid grid-cols-1 gap-6"> {/* Mise à jour responsive */}
                     <div>
-                      <label className="block text-gray-700 mb-1">Email Address</label>
+                      <label className="block text-gray-700 mb-1">Adresse Email</label>
                       <input
                         type="email"
                         name="email"
@@ -170,34 +176,34 @@ const UserProfile = () => {
                       />
                     </div>
                     <div>
-                      <label className="block text-gray-700 mb-1">Password</label>
+                      <label className="block text-gray-700 mb-1">Mot de Passe</label>
                       <input
                         type="password"
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                        placeholder="New password"
+                        placeholder="Nouveau mot de passe"
                       />
                     </div>
                     <div>
-                      <label className="block text-gray-700 mb-1">Confirm Password</label>
+                      <label className="block text-gray-700 mb-1">Confirmer Mot de Passe</label>
                       <input
-                        type="password"
+                        type="password" 
                         name="confirmPassword"
                         value={formData.confirmPassword}
                         onChange={handleChange}
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                        placeholder="Confirm new password"
+                        placeholder="Confirmez le nouveau mot de passe"
                       />
                     </div>
                   </div>
                 </div>
                 <button
                   onClick={handleUpdate}
-                  className="mt-6 ml-8 w-60 bg-gray-500 text-white py-4 px-4 "
+                  className="mt-6 w-full md:w-60 bg-yellow-500 text-white py-4 px-4"
                 >
-                  Save
+                  Sauvegarder
                 </button>
               </>
             )}
