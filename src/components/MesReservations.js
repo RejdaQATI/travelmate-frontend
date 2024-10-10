@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from '../axiosConfig'; // Assurez-vous que cette configuration d'axios est correcte
+import axios from '../axiosConfig'; 
 import { Link } from 'react-router-dom';
 
 const MesReservations = () => {
@@ -32,18 +32,16 @@ const MesReservations = () => {
       {reservations.length === 0 ? (
         <p className="text-center text-xl font-semibold">Vous n'avez aucune réservation pour le moment.</p>
       ) : (
-        <div className="space-y-6"> {/* Espacement entre les réservations */}
+        <div className="space-y-6"> 
           {reservations.map(reservation => (
             <div 
               key={reservation.id} 
               className="bg-white p-6 rounded-lg shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between w-full"
             >
-              <div className="flex-1 mb-4 md:mb-0"> {/* Flex avec espacement vertical pour petits écrans */}
+              <div className="flex-1 mb-4 md:mb-0"> 
                 <h2 className="text-2xl font-semibold mb-2">
                   Réservation #{reservation.id}
                 </h2>
-
-                {/* Utiliser reservation.trip_date pour accéder aux informations */}
                 {reservation.trip_date && reservation.trip_date.trip ? (
                   <>
                     <p className="text-lg"><strong>Voyage :</strong> {reservation.trip_date.trip.title}</p>

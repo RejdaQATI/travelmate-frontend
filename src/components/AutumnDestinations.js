@@ -31,7 +31,7 @@ const AutumnDestinations = () => {
         trips.slice(0, 5).map((trip, index) => (
           <div key={index} className="rounded-lg shadow-lg overflow-hidden">
             <img 
-              src={`http://localhost:8000/${trip.image}`} 
+              src={`${trip.image}`} 
               alt={trip.title} 
               className="w-full h-48 object-cover" 
             />

@@ -8,13 +8,11 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const url = useLocation();
 
-  // Check login status on initial render and whenever the token changes
   useEffect(() => {
     const token = localStorage.getItem('token'); 
     setIsLoggedIn(!!token);
   }, [isLoggedIn]);
 
-  // Function to detect scroll
   useEffect(() => {
     const handleScroll = () => {
       if (url.pathname === "/") {
@@ -35,7 +33,6 @@ const Header = () => {
 
   const isHomePage = url.pathname === "/";
 
-  // Toggle the burger menu
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -101,14 +98,19 @@ const Header = () => {
           >
             Voyages
           </Link>
-          <Link
-            to="/profile"
-            className={`transition duration-300 ${
-              isHomePage && !isScrolled ? 'text-white' : 'text-gray-700'
-            } hover:text-blue-500`}
-          >
-            Mon Profil
-          </Link>
+
+          {/* Afficher "Mon Profil" uniquement si l'utilisateur est connecté */}
+          {isLoggedIn && (
+            <Link
+              to="/profile"
+              className={`transition duration-300 ${
+                isHomePage && !isScrolled ? 'text-white' : 'text-gray-700'
+              } hover:text-blue-500`}
+            >
+              Mon Profil
+            </Link>
+          )}
+
           <Link
             to="/about"
             className={`transition duration-300 ${
@@ -151,13 +153,18 @@ const Header = () => {
               >
                 Voyages
               </Link>
-              <Link
-                to="/profile"
-                onClick={toggleMenu}
-                className="text-gray-700 hover:text-blue-500"
-              >
-                Mon Profil
-              </Link>
+
+              {/* Afficher "Mon Profil" uniquement si l'utilisateur est connecté */}
+              {isLoggedIn && (
+                <Link
+                  to="/profile"
+                  onClick={toggleMenu}
+                  className="text-gray-700 hover:text-blue-500"
+                >
+                  Mon Profil
+                </Link>
+              )}
+
               <Link
                 to="/about"
                 onClick={toggleMenu}

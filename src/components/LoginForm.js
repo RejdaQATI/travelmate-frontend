@@ -17,6 +17,7 @@ const LoginForm = () => {
     api.post('/login', { email, password })
       .then(response => {
         localStorage.setItem('token', response.data.token);
+        localStorage.setItem('role', response.data.user.role); 
         navigate('/');
       })
       .catch(error => {
@@ -93,6 +94,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-
-
-

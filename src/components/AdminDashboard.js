@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import ManageUsers from './ManageUsers';
 import ManageReservations from './ManageReservations';
-import ManageTrips from './ManageTrips';  // Import du nouveau composant
+import ManageTrips from './ManageTrips';  
 
 const AdminDashboard = () => {
-  const [activeTab, setActiveTab] = useState('users'); // Onglet actif
+  const [activeTab, setActiveTab] = useState('users'); 
 
-  // Fonction pour rendre le contenu correspondant à l'onglet sélectionné
   const renderContent = () => {
     switch (activeTab) {
       case 'users':
         return <ManageUsers />;
       case 'reservations':
         return <ManageReservations />;
-      case 'trips':  // Nouvelle option pour gérer les voyages
+      case 'trips':  
         return <ManageTrips />;
       default:
         return <ManageUsers />;

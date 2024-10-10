@@ -46,7 +46,7 @@ const TripsSlider = () => {
 
   <Swiper
     spaceBetween={20}
-    slidesPerView={5} // Nombre de slides par vue par défaut (desktop)
+    slidesPerView={5}
     loop={true}
     navigation={{
       prevEl: '.custom-prev-button',
@@ -54,20 +54,20 @@ const TripsSlider = () => {
     }}
     modules={[Navigation]}
     breakpoints={{
-      375: { // Pour les petits écrans, désactiver les flèches et rendre scrollable
+      375: { 
         slidesPerView: 2, 
         spaceBetween: 5,
 
       },
-      500: { // Pour les écrans de 640px et plus
+      500: { 
         slidesPerView: 3,
         spaceBetween: 10,
       },
-      1024: { // Pour les écrans de 1024px et plus (tablettes)
+      1024: {
         slidesPerView: 3,
         spaceBetween: 15,
       },
-      1280: { // Pour les écrans de 1280px et plus (desktop)
+      1280: { 
         slidesPerView: 5,
         spaceBetween: 20,
       }
@@ -75,9 +75,9 @@ const TripsSlider = () => {
   >
     {trips.map(trip => (
       <SwiperSlide key={trip.id}>
-        <div className="bg-white rounded-lg overflow-hidden w-[180px] md:w-[240px]"> {/* Default small screen width */}
+        <div className="bg-white rounded-lg overflow-hidden w-[180px] md:w-[240px]"> 
           <img
-            src={`http://localhost:8000/${trip.image}`}
+            src={`${trip.image}`}
             alt={trip.title}
             className="w-full h-40 md:h-56 object-cover rounded-lg"
           />

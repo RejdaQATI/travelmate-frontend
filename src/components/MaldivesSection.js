@@ -50,7 +50,7 @@ const MaldivesSection = () => {
                 <Link to={`/trips/${trip.id}`} key={trip.id} className="rounded-lg shadow-lg overflow-hidden w-[120px] sm:w-[150px] md:w-[180px]">
                   {/* Image of the trip */}
                   <img
-                    src={`http://localhost:8000/${trip.image}`} // Replace with the correct image path from your API
+                    src={`${trip.image}`} // Replace with the correct image path from your API
                     alt={trip.title}
                     className="w-full h-40 sm:h-52 object-cover object-left rounded-lg"
                   />

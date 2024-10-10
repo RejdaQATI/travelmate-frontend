@@ -6,7 +6,7 @@ const CityDetails = ({ city }) => {
   return (
     <div className="relative w-full max-w-6xl mx-auto mb-4 px-4"> {/* Ajout de padding horizontal pour petits écrans */}
       <img
-        src={`http://localhost:8000/${city.image}`}
+        src={`${city.image}`}
         alt={city.name}
         className="w-full h-[250px] sm:h-[450px] object-cover mx-auto rounded-lg shadow-lg mb-4"
       />

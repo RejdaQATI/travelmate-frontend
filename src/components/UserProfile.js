@@ -67,13 +67,12 @@ const UserProfile = () => {
       className="min-h-screen bg-cover bg-center flex justify-center pt-12 relative" 
       style={{
         backgroundImage: "url('../images/1321981.jpeg')", 
-        boxShadow: 'inset 0 0 0 2000px rgba(0, 0, 0, 0.3)'  // Ajoute un overlay sombre sur l'image
+        boxShadow: 'inset 0 0 0 2000px rgba(0, 0, 0, 0.3)'  
       }}
     >
       <div className="max-w-6xl w-full p-4">
-        <div className="bg-white bg-opacity-80 shadow-lg rounded-lg p-8 flex flex-col md:flex-row">  {/* Ajusté pour responsive */}
-          {/* Sidebar */}
-          <div className="w-full md:w-1/4 bg-white bg-opacity-70 p-6 shadow-lg mb-6 md:mb-0"> {/* Responsive Sidebar */}
+        <div className="bg-white bg-opacity-80 shadow-lg rounded-lg p-8 flex flex-col md:flex-row">  
+          <div className="w-full md:w-1/4 bg-white bg-opacity-70 p-6 shadow-lg mb-6 md:mb-0"> 
             <div className="text-center mb-6">
               <img 
                 className="w-24 h-24 rounded-full mx-auto mb-4" 
@@ -100,19 +99,17 @@ const UserProfile = () => {
               </a>
             </div>
           </div>
-
-          {/* Main Content */}
           <div className="w-full md:w-3/4 p-8">
             {showBookingHistory ? (
               <div className="bg-white bg-opacity-80 rounded-lg p-8 mb-6 shadow-lg">
                 <h2 className="text-3xl font-semibold mb-6">Historique des Réservations</h2>
-                <MesReservations /> {/* Intégrer le composant MesReservations ici */}
+                <MesReservations /> 
               </div>
             ) : (
               <>
                 <div className="bg-white bg-opacity-80 rounded-lg p-8 mb-6 shadow-lg">
                   <h2 className="text-3xl font-semibold mb-6">Informations Personnelles</h2>
-                  <div className="grid grid-cols-1 gap-6"> {/* Mise à jour responsive */}
+                  <div className="grid grid-cols-1 gap-6"> 
                     <div>
                       <label className="block text-gray-700 mb-1">Nom</label>
                       <input

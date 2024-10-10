@@ -41,7 +41,7 @@ const TripList = ({ searchFilters }) => {
           {filteredTrips.map(trip => (
             <div key={trip.id} className="w-full sm:w-1/3 md:w-1/4 lg:w-1/5 m-3 bg-white rounded-lg shadow-lg overflow-hidden">
               <img
-                src={`http://localhost:8000/${trip.image}`}
+                src={`${trip.image}`}
                 alt={trip.title}
                 className="w-full h-56 object-cover"
               />

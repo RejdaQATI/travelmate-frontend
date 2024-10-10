@@ -40,7 +40,7 @@ const PopularTrips = () => {
               <div className="w-[220px] sm:w-[220px] m-2 bg-white rounded-lg shadow-lg overflow-hidden">
                 {/* Image du voyage */}
                 <img
-                  src={`http://localhost:8000/${trip.image}`}
+                  src={`${trip.image}`}
                   alt={trip.title}
                   className="w-full h-[180px] object-cover rounded-t-lg"
                 />

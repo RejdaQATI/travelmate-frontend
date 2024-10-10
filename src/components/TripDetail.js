@@ -11,7 +11,6 @@ const TripDetail = () => {
   const navigate = useNavigate(); // Utilisé pour naviguer vers la page de réservation
 
   useEffect(() => {
-    // Requête pour récupérer les détails du voyage en fonction de l'ID
     axios.get(`/trips/${id}`)
       .then(response => {
         setTrip(response.data.trip);
@@ -50,7 +49,7 @@ const TripDetail = () => {
             <div className="w-full lg:w-2/3 pr-8">
               <section className="mb-8">
                 <h1 className="text-5xl font-bold mb-6 text-black">{trip.title}</h1>
-                <img src={`http://localhost:8000/${trip.image}`} alt={trip.title} className="w-full h-96 object-cover rounded-lg mb-8" />
+                <img src={`${trip.image}`} alt={trip.title} className="w-full h-96 object-cover rounded-lg mb-8" />
                 <p className="text-xl text-gray-700 mb-6">{trip.description}</p>
               </section>
 
