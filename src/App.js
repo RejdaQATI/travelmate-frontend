@@ -9,18 +9,11 @@ import About from './pages/About';
 import TripDetail from './components/TripDetail'; 
 import Reservation from './pages/Reservations'; 
 import AdminDashboard from './components/AdminDashboard'; 
+import ProtectedRoute from './components/ProtectedRoute';
+import UpdateTrip from './components/UpdateTrip';  // Importation de UpdateTrip
+import AddTrip from './components/AddTrip'; // Importation du composant AddTrip
 
 function App() {
-  const token = localStorage.getItem('token'); 
-  const role = localStorage.getItem('role'); 
-  
-  const isAuthenticated = () => {
-    return token !== null; 
-  };
-  const isAdmin = () => {
-    return role === 'admin'; 
-  };
-
   return (
     <Router>
       <Routes>
@@ -31,22 +24,54 @@ function App() {
         <Route path="/about" element={<About />} /> 
         <Route path="/trips/:id" element={<TripDetail />} />
 
-        {isAuthenticated() ? (
-          <>
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/reservation" element={<Reservation />} />
-          </>
-        ) : (
-          <>
-            <Route path="/profile" element={<Navigate to="/login" />} />
-            <Route path="/reservation" element={<Navigate to="/login" />} />
-          </>
-        )}
-        {isAuthenticated() && isAdmin() ? (
-          <Route path="/admin" element={<AdminDashboard />} />
-        ) : (
-          <Route path="/admin" element={<Navigate to="/" />} /> 
-        )}
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/reservation"
+          element={
+            <ProtectedRoute>
+              <Reservation />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute adminOnly={true}>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Route pour la mise à jour des voyages */}
+        <Route
+          path="/trips/update/:id"
+          element={
+            <ProtectedRoute adminOnly={true}>
+              <UpdateTrip />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Nouvelle Route pour ajouter un voyage */}
+        <Route
+          path="/trips/add"
+          element={
+            <ProtectedRoute adminOnly={true}>
+              <AddTrip />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   );

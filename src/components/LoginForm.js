@@ -6,7 +6,7 @@ import planeImage from '../assets/images/travelmate-plane.png';
 import cloudImage from '../assets/images/clouds.png'; 
 import cloud2Image from '../assets/images/clouds-2.png'; 
 
-const LoginForm = () => {
+const LoginForm = () => {  // Correction de la déclaration du composant
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -14,13 +14,18 @@ const LoginForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Appel API pour login
     api.post('/login', { email, password })
       .then(response => {
+        // Stocker le token et le rôle dans localStorage
         localStorage.setItem('token', response.data.token);
-        localStorage.setItem('role', response.data.user.role); 
+        localStorage.setItem('role', response.data.user.role);
+
+        // Rediriger vers la page d'accueil après la connexion
         navigate('/');
       })
       .catch(error => {
+        // Affiche un message d'erreur si la connexion échoue
         alert('Erreur lors de la connexion.');
       });
   };
@@ -75,6 +80,7 @@ const LoginForm = () => {
         </form>
       </div>
 
+      {/* Animation des nuages et de l'avion */}
       <div 
         className="cloud-animation" 
         style={{ backgroundImage: `url(${cloudImage})` }}

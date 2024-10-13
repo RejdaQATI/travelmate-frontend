@@ -1,41 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../axiosConfig';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+
+// Charger la clé publique Stripe depuis l'environnement
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
 const ReservationForm = () => {
-  const [numberOfParticipants, setNumberOfParticipants] = useState(1); // Par défaut, 1 participant
-  const [tripPrice, setTripPrice] = useState(0); // Le prix par participant
-  const [totalPrice, setTotalPrice] = useState(0); // Prix total
+  const [numberOfParticipants, setNumberOfParticipants] = useState(1);
+  const [tripPrice, setTripPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const stripe = useStripe();  // Utiliser Stripe pour gérer les paiements
+  const elements = useElements();  // Utiliser pour récupérer les éléments de Stripe
   const navigate = useNavigate();
 
-  // Récupérer trip_date_id depuis les props ou l'URL via useLocation
   const location = useLocation();
-  const { tripDateId } = location.state || {}; // tripDateId est passé depuis TripDetail lors du clic sur le bouton "Réserver maintenant"
+  const { tripDateId } = location.state || {};  // Récupérer l'ID de la date du voyage
 
-  // Récupérer le prix du voyage lors du chargement du composant
+  // Récupérer les détails du voyage et calculer le prix total
   useEffect(() => {
     if (tripDateId) {
-      axios.get(`/trips/dates/${tripDateId}`) // Assurez-vous que cette route renvoie les détails de trip_date, y compris le prix
+      axios.get(`/trips/dates/${tripDateId}`)
         .then(response => {
-          const pricePerPerson = response.data.trip_date.price; // Récupère le prix pour chaque participant
+          const pricePerPerson = response.data.trip_date.price;
           setTripPrice(pricePerPerson);
-          setTotalPrice(pricePerPerson * numberOfParticipants); // Calcule le prix total pour 1 participant au départ
+          setTotalPrice(pricePerPerson * numberOfParticipants);
         })
-        .catch(err => {
+        .catch(() => {
           setError('Erreur lors de la récupération des détails du voyage.');
         });
     }
   }, [tripDateId]);
 
-  // Mettre à jour le prix total lorsque le nombre de participants change
+  // Recalculer le prix total quand le nombre de participants change
   useEffect(() => {
     setTotalPrice(tripPrice * numberOfParticipants);
   }, [numberOfParticipants, tripPrice]);
 
-  // Soumission du formulaire de réservation
-  const handleSubmit = (e) => {
+  // Gérer la soumission du formulaire
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!tripDateId) {
@@ -43,23 +51,46 @@ const ReservationForm = () => {
       return;
     }
 
-    axios.post('/reservations', {
-      trip_date_id: tripDateId,
-      number_of_participants: numberOfParticipants,
-    })
-      .then(response => {
-        setSuccess('Votre réservation a été confirmée avec succès.');
-        setError(null);
+    if (!stripe || !elements) {
+      return;
+    }
 
-        // Redirection vers la page d'accueil après confirmation
-        setTimeout(() => {
-          navigate('/'); // Redirection vers la homepage
-        }, 1000); // Délai avant redirection pour laisser le message de succès
-      })
-      .catch(err => {
-        setError(err.response?.data?.error || 'Une erreur est survenue lors de la réservation.');
-        setSuccess(null);
+    setLoading(true);
+
+    try {
+      // Créer un payment method Stripe
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: elements.getElement(CardElement),
       });
+
+      if (error) {
+        setError(error.message);
+        setLoading(false);
+        return;
+      }
+
+      // Envoyer les informations de paiement au backend
+      const response = await axios.post('/payment', {
+        paymentMethodId: paymentMethod.id,
+        amount: totalPrice * 100,  // Convertir en centimes pour Stripe
+        trip_date_id: tripDateId,
+        number_of_participants: numberOfParticipants,
+      });
+
+      if (response.data.success) {
+        setSuccess('Votre réservation et paiement ont été confirmés avec succès.');
+        setError(null);
+        setTimeout(() => navigate('/'), 2000);  // Redirection après succès
+      } else {
+        setError('Le paiement a échoué.');
+      }
+
+    } catch (err) {
+      setError('Une erreur est survenue lors du paiement.');
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -89,23 +120,28 @@ const ReservationForm = () => {
           <p className="text-lg font-bold">Prix total : {totalPrice}€</p>
         </div>
 
+        {/* Stripe CardElement */}
+        <div className="mb-6">
+          <label htmlFor="card" className="block text-xl font-semibold mb-3">
+            Informations de paiement
+          </label>
+          <CardElement className="p-3 border border-gray-300 rounded-lg" />
+        </div>
+
         {/* Message d'erreur */}
-        {error && (
-          <p className="text-red-500 mb-4">{error}</p>
-        )}
+        {error && <p className="text-red-500 mb-4">{error}</p>}
 
         {/* Message de succès */}
-        {success && (
-          <p className="text-green-500 mb-4">{success}</p>
-        )}
+        {success && <p className="text-green-500 mb-4">{success}</p>}
 
         {/* Bouton de soumission */}
         <div className="text-center">
           <button
             type="submit"
             className="bg-blue-600 text-white text-lg px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300"
+            disabled={loading || !stripe}
           >
-            Confirmer la réservation
+            {loading ? 'Processing...' : 'Confirmer la réservation'}
           </button>
         </div>
       </form>
@@ -113,4 +149,13 @@ const ReservationForm = () => {
   );
 };
 
-export default ReservationForm;
+// Wrapper du composant pour inclure Stripe
+const ReservationComponent = () => {
+  return (
+    <Elements stripe={stripePromise}>
+      <ReservationForm />
+    </Elements>
+  );
+};
+
+export default ReservationComponent;

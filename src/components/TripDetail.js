@@ -54,14 +54,20 @@ const TripDetail = () => {
               </section>
 
               {/* Informations sur le voyage */}
-              <section className="mb-8">
-                <h2 className="text-3xl font-semibold text-black mb-4">Détails du voyage</h2>
-                <ul className="list-disc list-inside text-gray-600">
-                  <li><strong>Durée :</strong> {trip.duration} jours</li>
-                  <li><strong>Prix :</strong> {trip.price} €</li>
-                  <li><strong>Type :</strong> {trip.pack_type}</li>
-                </ul>
-              </section>
+{/* Informations sur le voyage */}
+<section className="mb-8">
+  <h2 className="text-3xl font-semibold text-black mb-4">Détails du voyage</h2>
+  <ul className="list-disc list-inside text-gray-600">
+    <li><strong>Durée :</strong> {trip.duration} jours</li>
+    <li>
+      <strong>Prix : </strong> 
+      {selectedTripDate 
+        ? `${selectedTripDate.price} €`  // Afficher le prix de la date sélectionnée
+        : " Sélectionnez une date pour voir le prix"}
+    </li>
+  </ul>
+</section>
+
 
               {/* Activités */}
               {trip.activities && (

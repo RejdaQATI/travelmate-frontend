@@ -2,7 +2,7 @@ import React from 'react';
 import axios from '../axiosConfig'; 
 import { useNavigate } from 'react-router-dom';
 
-const Logout = ({ setIsLoggedIn }) => {
+const Logout = ({ setIsLoggedIn, isScrolled, isHomePage }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -24,14 +24,17 @@ const Logout = ({ setIsLoggedIn }) => {
       });
   };
 
-  return (
-    <button
+    return (
+      <span
       onClick={handleLogout}
-      className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300"
+      className={`cursor-pointer font-bold transition duration-300 ${
+        isScrolled ? 'text-black' : 'text-white'  // Noir quand scrolled, blanc sinon
+      }`}
     >
       Déconnexion
-    </button>
-  );
+    </span>
+    );
+    
 };
 
 export default Logout;

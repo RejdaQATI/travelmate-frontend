@@ -1,11 +1,11 @@
 import React from 'react';
 
-const HeroImage = () => {
+const HeroImage = ({ backgroundImage = 'images/webp.webp', title = "Faites vos valises, l'aventure commence !" }) => {
   return (
     <div className="relative h-[300px] sm:h-[400px] md:h-[500px]"> {/* Ajustement de la hauteur */}
       {/* Hero background image */}
       <img
-        src="images/webp.webp"
+        src={backgroundImage}
         alt="Hero"
         className="w-full h-full object-cover"
       />
@@ -16,7 +16,7 @@ const HeroImage = () => {
       {/* Optional overlay text */}
       <div className="absolute inset-0 flex items-center justify-center px-4 text-center"> {/* Text centré et padding horizontal */}
         <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white"> {/* Taille du texte ajustée */}
-          Faites vos valises, l'aventure commence !
+          {title}
         </h1>
       </div>
     </div>

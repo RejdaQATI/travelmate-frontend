@@ -6,16 +6,14 @@ const UserProfile = () => {
   const [user, setUser] = useState({
     name: '',
     email: '',
-    phone: '',
-    location: '',
-    dateOfBirth: '',
+    phone_number: '', // Remplacé 'phone' par 'phone_number'
+    birthdate: '',    // Remplacé 'dateOfBirth' par 'birthdate'
   });
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
-    location: '',
-    dateOfBirth: '',
+    phone_number: '', // Remplacé 'phone' par 'phone_number'
+    birthdate: '',    // Remplacé 'dateOfBirth' par 'birthdate'
     password: '',
     confirmPassword: ''
   });
@@ -74,26 +72,27 @@ const UserProfile = () => {
         <div className="bg-white bg-opacity-80 shadow-lg rounded-lg p-8 flex flex-col md:flex-row">  
           <div className="w-full md:w-1/4 bg-white bg-opacity-70 p-6 shadow-lg mb-6 md:mb-0"> 
             <div className="text-center mb-6">
-              <img 
-                className="w-24 h-24 rounded-full mx-auto mb-4" 
-                src={user.avatar || "https://via.placeholder.com/150"} 
-                alt="Avatar de l'utilisateur" 
-              />
               <h3 className="text-lg font-semibold">{user.name}</h3>
-              <p className="text-gray-600">{user.dateOfBirth}</p>
+              <p className="text-gray-600">
+              {new Date(user.birthdate).toLocaleDateString('fr-FR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}
+        </p> 
             </div>
             <div className="space-y-6">
               <a 
                 href="#" 
-                onClick={() => setShowBookingHistory(false)} // Afficher le profil
-                className={`block text-lg text-gray-800 hover:text-gray-600 px-4 py-2 rounded-lg transition-all duration-300 ${!showBookingHistory ? 'bg-gray-200 border-gray-500' : ''}`} // Active state for Profile Informations
+                onClick={() => setShowBookingHistory(false)} 
+                className={`block text-lg text-gray-800 hover:text-gray-600 px-4 py-2 rounded-lg transition-all duration-300 ${!showBookingHistory ? 'bg-gray-200 border-gray-500' : ''}`} 
               >
                 Informations du Profil
               </a>
               <a 
                 href="#" 
-                onClick={toggleBookingHistory} // Afficher l'historique des réservations
-                className={`block text-lg text-gray-800 hover:text-gray-600 px-4 py-2 rounded-lg transition-all duration-300 ${showBookingHistory ? 'bg-gray-200 border-gray-500' : ''}`} // Active state for Booking History
+                onClick={toggleBookingHistory} 
+                className={`block text-lg text-gray-800 hover:text-gray-600 px-4 py-2 rounded-lg transition-all duration-300 ${showBookingHistory ? 'bg-gray-200 border-gray-500' : ''}`} 
               >
                 Réservations
               </a>
@@ -124,8 +123,8 @@ const UserProfile = () => {
                       <label className="block text-gray-700 mb-1">Date de Naissance</label>
                       <input
                         type="date"
-                        name="dateOfBirth"
-                        value={formData.dateOfBirth}
+                        name="birthdate"  // Remplacé 'dateOfBirth' par 'birthdate'
+                        value={formData.birthdate}  // Remplacé 'dateOfBirth' par 'birthdate'
                         onChange={handleChange}
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg"
                       />
@@ -134,18 +133,8 @@ const UserProfile = () => {
                       <label className="block text-gray-700 mb-1">Téléphone</label>
                       <input
                         type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-gray-700 mb-1">Localisation</label>
-                      <input
-                        type="text"
-                        name="location"
-                        value={formData.location}
+                        name="phone_number"  // Remplacé 'phone' par 'phone_number'
+                        value={formData.phone_number}  // Remplacé 'phone' par 'phone_number'
                         onChange={handleChange}
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg"
                       />
@@ -161,7 +150,7 @@ const UserProfile = () => {
 
                 <div className="bg-white bg-opacity-80 rounded-lg p-8 shadow-lg">
                   <h2 className="text-3xl font-semibold mb-6">Sécurité</h2>
-                  <div className="grid grid-cols-1 gap-6"> {/* Mise à jour responsive */}
+                  <div className="grid grid-cols-1 gap-6">
                     <div>
                       <label className="block text-gray-700 mb-1">Adresse Email</label>
                       <input
@@ -206,9 +195,10 @@ const UserProfile = () => {
             )}
           </div>
         </div>
-      </div>
+        </div>
     </div>
   );
 };
 
 export default UserProfile;
+
