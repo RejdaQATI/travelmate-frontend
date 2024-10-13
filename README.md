@@ -1,70 +1,55 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Conversations
+11.04 GB of 15 GB (73%) used
+Terms · Privacy · Programme Policies
+Last account activity: 0 minutes ago
+Open in 1 other location · Details
+# TravelMate - Frontend
 
-## Available Scripts
+Ce dépôt contient le frontend de l'application **TravelMate**. Cette application est un système de gestion de voyages avec un frontend en **React** et un backend en **Laravel**. Suivez les instructions ci-dessous pour configurer et démarrer l'application.
 
-In the project directory, you can run:
 
-### `npm start`
+## Pré-requis
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Assurez-vous d'avoir les éléments suivants installés sur votre machine avant de commencer :  
+  
+- **Node.js** (version 14 ou supérieure)  
+- **npm** (ou **yarn**)  
+- **Git** pour cloner le dépôt  
+- **Backend** installé et fonctionnel (suivez les instructions dans le [dépôt backend]([https://github.com/RejdaQATI/travelmate-backend](https://github.com/RejdaQATI/travelmate-backend)))
 
-### `npm test`
+## Installation du Frontend
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**1.** Clonez ce dépôt :
+```
+git clone https://github.com/RejdaQATI/travelmate-frontend.git
+cd travelmate-frontend
+```
 
-### `npm run build`
+**2.** Installez les dépendances du projet :
+```
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**3.** Copiez le fichier `.env` à la racine du projet en vous basant sur le fichier `.env.example` :
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+cp .env.example .env
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Dans ce fichier `.env`, assurez-vous de configurer l'URL de l'API pour qu'elle pointe vers le backend (par exemple http://localhost:8000 si le backend tourne localement).
 
-### `npm run eject`
+**4.** Démarrez le serveur de développement :
+```
+npm start  
+```
+Le frontend sera accessible à l'adresse suivante : http://localhost:3000.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## API  
+Le frontend communique avec le backend via des appels API REST. Assurez-vous que votre backend Laravel est correctement configuré et démarré.  
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Pour configurer l'URL de l'API, modifiez le fichier `.env` dans le frontend, en spécifiant l'URL de votre backend Laravel :   
+```
+REACT_APP_API_URL=http://localhost:8000
+```

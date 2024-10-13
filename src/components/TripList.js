@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom'; // Importer Link pour la navigation
+import { Link } from 'react-router-dom'; 
 import axios from '../axiosConfig'; 
 
-const TripList = () => {
+const TripList = ({ initialContinent }) => {  // Accepter le continent comme prop
   const [trips, setTrips] = useState([]);
   const [filteredTrips, setFilteredTrips] = useState([]); 
-  const [selectedContinent, setSelectedContinent] = useState('');
+  const [selectedContinent, setSelectedContinent] = useState(initialContinent || '');  // Utiliser initialContinent
 
   useEffect(() => {
     axios.get('/trips')
@@ -51,7 +51,7 @@ const TripList = () => {
       {/* Liste des voyages filtrés */}
       <div className="flex flex-wrap m-3 justify-center">
         {filteredTrips.map(trip => (
-          <Link to={`/trips/${trip.id}`} key={trip.id} className="w-full sm:w-1/3 md:w-1/4 lg:w-1/5 m-3 bg-white rounded-lg shadow-lg overflow-hidden"> {/* Ajouter le lien autour de chaque voyage */}
+          <Link to={`/trips/${trip.id}`} key={trip.id} className="w-full sm:w-1/3 md:w-1/4 lg:w-1/5 m-3 bg-white rounded-lg shadow-lg overflow-hidden">
             <img
               src={`${trip.image}`}
               alt={trip.title}
