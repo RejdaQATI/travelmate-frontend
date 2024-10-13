@@ -1,9 +1,3 @@
-
-Conversations
-11.04 GB of 15 GB (73%) used
-Terms · Privacy · Programme Policies
-Last account activity: 0 minutes ago
-Open in 1 other location · Details
 # TravelMate - Frontend
 
 Ce dépôt contient le frontend de l'application **TravelMate**. Cette application est un système de gestion de voyages avec un frontend en **React** et un backend en **Laravel**. Suivez les instructions ci-dessous pour configurer et démarrer l'application.
