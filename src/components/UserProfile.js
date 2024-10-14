@@ -6,14 +6,14 @@ const UserProfile = () => {
   const [user, setUser] = useState({
     name: '',
     email: '',
-    phone_number: '', // Remplacé 'phone' par 'phone_number'
-    birthdate: '',    // Remplacé 'dateOfBirth' par 'birthdate'
+    phone_number: '', 
+    birthdate: '',    
   });
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone_number: '', // Remplacé 'phone' par 'phone_number'
-    birthdate: '',    // Remplacé 'dateOfBirth' par 'birthdate'
+    phone_number: '', 
+    birthdate: '',    
     password: '',
     confirmPassword: ''
   });
@@ -123,8 +123,8 @@ const UserProfile = () => {
                       <label className="block text-gray-700 mb-1">Date de Naissance</label>
                       <input
                         type="date"
-                        name="birthdate"  // Remplacé 'dateOfBirth' par 'birthdate'
-                        value={formData.birthdate}  // Remplacé 'dateOfBirth' par 'birthdate'
+                        name="birthdate"  
+                        value={formData.birthdate}  
                         onChange={handleChange}
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg"
                       />
@@ -133,8 +133,8 @@ const UserProfile = () => {
                       <label className="block text-gray-700 mb-1">Téléphone</label>
                       <input
                         type="tel"
-                        name="phone_number"  // Remplacé 'phone' par 'phone_number'
-                        value={formData.phone_number}  // Remplacé 'phone' par 'phone_number'
+                        name="phone_number" 
+                        value={formData.phone_number}  
                         onChange={handleChange}
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg"
                       />

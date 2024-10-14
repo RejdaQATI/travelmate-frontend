@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'; 
 import axios from '../axiosConfig'; 
 
-const TripList = ({ initialContinent }) => {  // Accepter le continent comme prop
+const TripList = ({ initialContinent }) => {  
   const [trips, setTrips] = useState([]);
   const [filteredTrips, setFilteredTrips] = useState([]); 
-  const [selectedContinent, setSelectedContinent] = useState(initialContinent || '');  // Utiliser initialContinent
+  const [selectedContinent, setSelectedContinent] = useState(initialContinent || '');
 
   useEffect(() => {
     axios.get('/trips')
@@ -33,7 +33,6 @@ const TripList = ({ initialContinent }) => {  // Accepter le continent comme pro
 
   return (
     <div>
-      {/* Boutons pour les continents */}
       <div className="flex justify-center space-x-4 mb-6 mt-4">
         {['Europe', 'Amérique', 'Afrique', 'Asie', 'Australie'].map(continent => (
           <button
@@ -48,7 +47,6 @@ const TripList = ({ initialContinent }) => {  // Accepter le continent comme pro
         ))}
       </div>
 
-      {/* Liste des voyages filtrés */}
       <div className="flex flex-wrap m-3 justify-center">
         {filteredTrips.map(trip => (
           <Link to={`/trips/${trip.id}`} key={trip.id} className="w-full sm:w-1/3 md:w-1/4 lg:w-1/5 m-3 bg-white rounded-lg shadow-lg overflow-hidden">
@@ -67,8 +65,6 @@ const TripList = ({ initialContinent }) => {  // Accepter le continent comme pro
           </Link>
         ))}
       </div>
-
-      {/* Message si aucun voyage n'est disponible */}
       {!filteredTrips.length && <p className="text-center text-lg">Aucun voyage disponible pour le moment !</p>}
     </div>
   );

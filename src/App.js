@@ -10,8 +10,9 @@ import TripDetail from './components/TripDetail';
 import Reservation from './pages/Reservations'; 
 import AdminDashboard from './components/AdminDashboard'; 
 import ProtectedRoute from './components/ProtectedRoute';
-import UpdateTrip from './components/UpdateTrip';  // Importation de UpdateTrip
-import AddTrip from './components/AddTrip'; // Importation du composant AddTrip
+import UpdateTrip from './components/UpdateTrip';  
+import AddTrip from './components/AddTrip'; 
+import TermsAndConditions from './components/TermsAndConditions';  
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/trips" element={<Trips />} />
         <Route path="/about" element={<About />} /> 
         <Route path="/trips/:id" element={<TripDetail />} />
+        <Route path="/terms" element={<TermsAndConditions />} />
 
         <Route
           path="/profile"
@@ -51,7 +53,6 @@ function App() {
           }
         />
 
-        {/* Route pour la mise à jour des voyages */}
         <Route
           path="/trips/update/:id"
           element={
@@ -61,7 +62,6 @@ function App() {
           }
         />
 
-        {/* Nouvelle Route pour ajouter un voyage */}
         <Route
           path="/trips/add"
           element={

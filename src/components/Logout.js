@@ -15,9 +15,9 @@ const Logout = ({ setIsLoggedIn, isScrolled, isHomePage }) => {
 
     axios.post('/logout', {})
       .then(() => {
-        localStorage.removeItem('token'); // Remove token from localStorage
-        setIsLoggedIn(false); // Set login state to false
-        navigate('/'); // Navigate to homepage after logout
+        localStorage.removeItem('token'); 
+        setIsLoggedIn(false);
+        navigate('/'); 
       })
       .catch(error => {
         console.error('Erreur lors de la déconnexion', error);
@@ -28,7 +28,7 @@ const Logout = ({ setIsLoggedIn, isScrolled, isHomePage }) => {
       <span
       onClick={handleLogout}
       className={`cursor-pointer font-bold transition duration-300 ${
-        isScrolled ? 'text-black' : 'text-white'  // Noir quand scrolled, blanc sinon
+        isScrolled ? 'text-black' : 'text-white' 
       }`}
     >
       Déconnexion

@@ -8,7 +8,6 @@ const TripDatePicker = ({ tripId, onDateSelect }) => {
   const [selectedRange, setSelectedRange] = useState(null);
 
   useEffect(() => {
-    // Récupérer les dates disponibles pour le voyage
     axios.get(`/trips/${tripId}/dates`)
       .then(response => {
         setDates(response.data.trip_dates || []);
@@ -31,16 +30,15 @@ const TripDatePicker = ({ tripId, onDateSelect }) => {
       setSelectedRange({
         start: new Date(foundRange.start_date),
         end: new Date(foundRange.end_date),
-        price: foundRange.price, // Récupérer le prix de la période sélectionnée
-        id: foundRange.id, // Ajouter l'ID du trip_date
+        price: foundRange.price, 
+        id: foundRange.id
       });
 
-      // Passer la période et le prix à TripDetail via onDateSelect
       onDateSelect({
         start: new Date(foundRange.start_date),
         end: new Date(foundRange.end_date),
         price: foundRange.price,
-        id: foundRange.id, // Inclure l'ID du trip_date pour la réservation
+        id: foundRange.id, 
       });
     }
   };
@@ -60,7 +58,7 @@ const TripDatePicker = ({ tripId, onDateSelect }) => {
       {selectedRange && (
         <div className="mt-4">
           <p>Période sélectionnée : {selectedRange.start.toLocaleDateString()} - {selectedRange.end.toLocaleDateString()}</p>
-          <p>Prix : {selectedRange.price} €</p> {/* Affichage du prix */}
+          <p>Prix : {selectedRange.price} €</p>
         </div>
       )}
     </div>

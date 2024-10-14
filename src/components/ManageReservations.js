@@ -4,7 +4,7 @@ import api from '../axiosConfig';
 const ManageReservations = () => {
   const [reservations, setReservations] = useState([]);
   const [modifiedReservations, setModifiedReservations] = useState({});
-  const [isEditing, setIsEditing] = useState({}); // Pour suivre l'état d'édition de chaque réservation
+  const [isEditing, setIsEditing] = useState({}); 
 
   useEffect(() => {
     api.get('/reservations')
@@ -16,7 +16,6 @@ const ManageReservations = () => {
       });
   }, []);
 
-  // Gérer les modifications locales de chaque réservation
   const handleChange = (id, field, value) => {
     setModifiedReservations(prev => ({
       ...prev,
@@ -27,11 +26,9 @@ const ManageReservations = () => {
     }));
   };
 
-  // Fonction pour sauvegarder les modifications
+
   const handleSave = (id) => {
     const updatedFields = modifiedReservations[id] || {};
-
-    // Remplir les champs non modifiés avec les valeurs actuelles
     const currentReservation = reservations.find(reservation => reservation.id === id);
     const payload = {
       status: updatedFields.status || currentReservation.status,
@@ -40,15 +37,10 @@ const ManageReservations = () => {
 
     api.put(`/reservations/${id}`, payload)
       .then(response => {
-        // Mettre à jour la réservation dans l'état après la réponse de l'API
         setReservations(reservations.map(reservation =>
           reservation.id === id ? { ...reservation, ...response.data.reservation } : reservation
         ));
-
-        // Passer en mode "non-édition" après la sauvegarde
         setIsEditing(prev => ({ ...prev, [id]: false }));
-
-        // Effacer les changements locaux une fois sauvegardés
         setModifiedReservations(prev => {
           const updated = { ...prev };
           delete updated[id];
@@ -60,9 +52,7 @@ const ManageReservations = () => {
       });
   };
 
-  // Fonction pour activer/désactiver le mode édition
   const handleEdit = (id) => {
-    // Initialiser les champs de modification avec les valeurs actuelles si nécessaire
     setModifiedReservations(prev => ({
       ...prev,
       [id]: {
@@ -74,12 +64,10 @@ const ManageReservations = () => {
     setIsEditing(prev => ({ ...prev, [id]: true }));
   };
 
-  // Fonction pour supprimer une réservation
   const handleDelete = (id) => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')) {
       api.delete(`/reservations/${id}`)
         .then(() => {
-          // Supprimer la réservation de l'état
           setReservations(reservations.filter(reservation => reservation.id !== id));
         })
         .catch(error => {
@@ -112,8 +100,6 @@ const ManageReservations = () => {
                 {reservation.trip_date?.trip?.title || 'Voyage inconnu'}
               </td>
               <td className="border px-4 py-2">{reservation.number_of_participants}</td>
-
-              {/* Select pour changer le statut de la réservation */}
               <td className="border px-4 py-2">
                 {isEditing[reservation.id] ? (
                   <select
@@ -129,8 +115,6 @@ const ManageReservations = () => {
                   <span>{reservation.status}</span>
                 )}
               </td>
-
-              {/* Select pour changer le statut de paiement */}
               <td className="border px-4 py-2">
                 {isEditing[reservation.id] ? (
                   <select
@@ -147,7 +131,6 @@ const ManageReservations = () => {
                 )}
               </td>
 
-              {/* Bouton Save / Edit et Supprimer */}
               <td className="border px-4 py-2">
                 {isEditing[reservation.id] ? (
                   <button
@@ -168,7 +151,7 @@ const ManageReservations = () => {
                       className="bg-red-500 text-white px-4 py-2 rounded-lg"
                       onClick={() => handleDelete(reservation.id)}
                     >
-                      &#10005; {/* Unicode pour la croix */}
+                      &#10005; 
                     </button>
                   </>
                 )}

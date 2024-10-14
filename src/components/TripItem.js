@@ -1,4 +1,4 @@
-// TripItem.js
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ const TripItem = ({ trip }) => {
     <div className="rounded-lg shadow-lg overflow-hidden w-[150px] md:w-[180px]">
       <Link to={`/trip/${trip.id}`}>
         <img
-          src={`${trip.image}`} // Replace with your image path
+          src={`${trip.image}`} 
           alt={trip.title}
           className="w-full h-52 object-cover object-left"
         />

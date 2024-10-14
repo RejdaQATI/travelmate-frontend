@@ -5,7 +5,6 @@ const Footer = () => {
     <footer style={{ backgroundColor: '#13253F' }} className="text-white py-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* About Section */}
           <div>
             <h2 className="text-xl font-semibold mb-4">À propos de nous</h2>
             <p className="text-gray-400">
@@ -13,7 +12,6 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h2 className="text-xl font-semibold mb-4">Liens rapides</h2>
             <ul className="space-y-2 text-gray-400">
@@ -24,7 +22,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Information */}
           <div>
             <h2 className="text-xl font-semibold mb-4">Contactez-nous</h2>
             <ul className="space-y-2 text-gray-400">
@@ -34,7 +31,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Social Media */}
           <div>
             <h2 className="text-xl font-semibold mb-4">Suivez-nous</h2>
             <ul className="flex space-x-4 text-gray-400">
@@ -46,7 +42,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright Section */}
         <div className="mt-12 border-t border-gray-800 pt-6 text-center text-gray-500">
           <p>&copy; 2024 Travel Mate. Tous droits réservés.</p>
         </div>

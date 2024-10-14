@@ -29,16 +29,15 @@ const ManageTrips = () => {
   };
 
   const handleUpdate = (id) => {
-    navigate(`/trips/update/${id}`); // Redirige vers la page de mise à jour
+    navigate(`/trips/update/${id}`); 
   };
 
   const handleAddTrip = () => {
-    navigate('/trips/add'); // Redirige vers la page d'ajout d'un nouveau voyage
+    navigate('/trips/add'); 
   };
 
   return (
     <div>
-      {/* Ajouter un bouton en haut à droite */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">Gérer les voyages</h2>
         <button
@@ -74,7 +73,7 @@ const ManageTrips = () => {
                 </button>
                 <button
                   className="bg-blue-500 text-white px-4 py-2 ml-2 rounded-lg"
-                  onClick={() => handleUpdate(trip.id)} // Redirection vers la page de mise à jour
+                  onClick={() => handleUpdate(trip.id)} 
                 >
                   Modifier
                 </button>

@@ -290,9 +290,10 @@ const UpdateTrip = () => {
     city_id: '',
   });
 
-  const [image, setImage] = useState(null); // State pour l'image
+  const [image, setImage] = useState(null);
+  const [cities, setCities] = useState([]); 
 
-  // State pour les infos du TripDate
+
   const [tripDate, setTripDate] = useState({
     price: '',
     start_date: '',
@@ -311,7 +312,7 @@ const UpdateTrip = () => {
       .catch(error => {
         console.error('Erreur lors de la récupération des informations du voyage', error);
       });
-
+  
     // Récupérer les infos de TripDate
     axios.get(`/trips/${id}/dates`)
       .then(response => {
@@ -323,8 +324,18 @@ const UpdateTrip = () => {
       .catch(error => {
         console.error('Erreur lors de la récupération des informations de date du voyage', error);
       });
+  
+    // Récupérer les villes disponibles
+    axios.get('/cities')
+      .then(response => {
+        setCities(response.data.cities); // Remplit les villes
+      })
+      .catch(error => {
+        console.error('Erreur lors de la récupération des villes', error);
+      });
+  
   }, [id]);
-
+  
   // Gérer les changements des inputs pour le Trip
   const handleTripChange = (e) => {
     setTrip({ ...trip, [e.target.name]: e.target.value });
@@ -352,6 +363,7 @@ const UpdateTrip = () => {
     formData.append('duration', trip.duration);
     formData.append('activities', trip.activities);
     formData.append('included', trip.included);
+    formData.append('city_id', trip.city_id); 
     if (image) {
       formData.append('image', image); // Ajouter l'image uniquement si elle est présente
     }
@@ -446,6 +458,23 @@ const UpdateTrip = () => {
           ></textarea>
         </div>
 
+        <div>
+          <label>Ville</label>
+          <select
+            name="city_id"
+            value={trip.city_id}
+            onChange={handleTripChange}
+            className="border px-4 py-2 w-full"
+          >
+            <option value="">Sélectionnez une ville</option>
+            {cities.map(city => (
+              <option key={city.id} value={city.id}>
+                {city.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        
         <div>
           <label>Image</label>
           <input

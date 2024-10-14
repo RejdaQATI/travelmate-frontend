@@ -40,12 +40,10 @@ const TripDetail = () => {
 
   return (
     <>
-      {/* Inclusion du Header */}
       <Header />
       <div className="container mx-auto px-4 py-8 flex flex-col lg:flex-row mt-16">
         {trip ? (
           <>
-            {/* Contenu principal à gauche */}
             <div className="w-full lg:w-2/3 pr-8">
               <section className="mb-8">
                 <h1 className="text-5xl font-bold mb-6 text-black">{trip.title}</h1>
@@ -53,8 +51,6 @@ const TripDetail = () => {
                 <p className="text-xl text-gray-700 mb-6">{trip.description}</p>
               </section>
 
-              {/* Informations sur le voyage */}
-{/* Informations sur le voyage */}
 <section className="mb-8">
   <h2 className="text-3xl font-semibold text-black mb-4">Détails du voyage</h2>
   <ul className="list-disc list-inside text-gray-600">
@@ -62,14 +58,12 @@ const TripDetail = () => {
     <li>
       <strong>Prix : </strong> 
       {selectedTripDate 
-        ? `${selectedTripDate.price} €`  // Afficher le prix de la date sélectionnée
+        ? `${selectedTripDate.price} €`  
         : " Sélectionnez une date pour voir le prix"}
     </li>
   </ul>
 </section>
 
-
-              {/* Activités */}
               {trip.activities && (
                 <section className="mb-8">
                   <h2 className="text-3xl font-semibold text-black mb-4">Activités</h2>
@@ -80,8 +74,6 @@ const TripDetail = () => {
                   </ul>
                 </section>
               )}
-
-              {/* Inclus */}
               {trip.included && (
                 <section className="mb-8">
                   <h2 className="text-3xl font-semibold text-black mb-4">Inclus dans le voyage</h2>
@@ -93,10 +85,7 @@ const TripDetail = () => {
                 </section>
               )}
             </div>
-
-            {/* Boîte avec le prix, bouton réserver et calendrier à droite */}
             <div className="w-full lg:w-1/3 bg-gray-100 p-6 rounded-lg">
-              {/* Composant TripDatePicker pour choisir la date */}
               <div className="mt-6">
                 <TripDatePicker tripId={trip.id} onDateSelect={handleDateSelect} />
               </div>
@@ -110,8 +99,6 @@ const TripDetail = () => {
                       : "Sélectionnez une date"}
                 </h2>
               </div>
-
-              {/* Bouton réserver */}
               <div className="text-center mt-6">
                 <button
                   onClick={handleReservationClick}

@@ -21,7 +21,6 @@ const RegisterForm = () => {
     })
     .catch(error => {
       if (error.response) {
-        // Affiche les erreurs spécifiques dans la console
         console.log(error.response.data);
       } else {
         alert('Erreur lors de l\'inscription.');

@@ -21,7 +21,6 @@ const AdminDashboard = () => {
 
   return (
     <div className="flex min-h-screen">
-      {/* Sidebar */}
       <div className="w-1/4 bg-gray-800 text-white p-4">
         <h2 className="text-2xl font-bold mb-8">Admin Dashboard</h2>
         <ul>
@@ -58,7 +57,6 @@ const AdminDashboard = () => {
         </ul>
       </div>
 
-      {/* Main Content */}
       <div className="w-3/4 bg-white p-8">
         {renderContent()}
       </div>

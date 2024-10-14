@@ -13,6 +13,7 @@ import CityDetails from '../components/CityDetails';
 
 const Home = () => {
   const [searchFilters, setSearchFilters] = useState(null);
+  const [selectedCity, setSelectedCity] = useState(null); 
 
   return (
     <div>
@@ -24,8 +25,8 @@ const Home = () => {
         <MaldivesSection />
         <TripsSlider />
         <AlaskaSection />
-        <CityList />
-        <CityDetails />
+        <CityList onCitySelect={setSelectedCity} />
+        <CityDetails city={selectedCity} />
         <AutumnDestinations />
       </main>
       <Footer />

@@ -3,12 +3,11 @@ import axios from '../axiosConfig';
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
-  const [editingUser, setEditingUser] = useState(null); // Stocke l'utilisateur en cours de modification
+  const [editingUser, setEditingUser] = useState(null);
   const [updatedName, setUpdatedName] = useState('');
   const [updatedRole, setUpdatedRole] = useState('');
 
   useEffect(() => {
-    // Récupérer tous les utilisateurs via l'API
     axios.get('/users')
       .then(response => {
         setUsers(response.data.users);
@@ -18,32 +17,30 @@ const ManageUsers = () => {
       });
   }, []);
 
-  // Fonction pour commencer la modification d'un utilisateur
+
   const handleEditUser = (user) => {
-    setEditingUser(user); // Définit l'utilisateur en cours de modification
-    setUpdatedName(user.name); // Initialise le nom à modifier
-    setUpdatedRole(user.role); // Initialise le rôle à modifier
+    setEditingUser(user); 
+    setUpdatedName(user.name); 
+    setUpdatedRole(user.role); 
   };
 
-  // Fonction pour soumettre la mise à jour de l'utilisateur
   const handleUpdateUser = () => {
     axios.put(`/users/${editingUser.id}`, {
       name: updatedName,
       role: updatedRole
     })
       .then(response => {
-        // Met à jour la liste des utilisateurs localement
         setUsers(users.map(user => (user.id === editingUser.id ? response.data.user : user)));
-        setEditingUser(null); // Réinitialise le mode édition
+        setEditingUser(null); 
       })
       .catch(error => {
         console.error("Erreur lors de la mise à jour de l'utilisateur:", error);
       });
   };
 
-  // Fonction pour annuler la modification
+
   const handleCancelEdit = () => {
-    setEditingUser(null); // Réinitialise le mode édition
+    setEditingUser(null);
   };
 
   return (
@@ -63,7 +60,6 @@ const ManageUsers = () => {
           {users.map(user => (
             <tr key={user.id}>
               <td className="border px-4 py-2">
-                {/* Si l'utilisateur est en mode édition, afficher un champ de texte */}
                 {editingUser && editingUser.id === user.id ? (
                   <input 
                     type="text" 
@@ -77,7 +73,6 @@ const ManageUsers = () => {
               </td>
               <td className="border px-4 py-2">{user.email}</td>
               <td className="border px-4 py-2">
-                {/* Si l'utilisateur est en mode édition, afficher un champ de sélection pour le rôle */}
                 {editingUser && editingUser.id === user.id ? (
                   <select 
                     value={updatedRole} 
