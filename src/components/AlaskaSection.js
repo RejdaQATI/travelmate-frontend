@@ -16,7 +16,6 @@ const AlaskaSection = () => {
           />
         </div>
 
-        {/* Texte à droite */}
         <div className="w-full md:w-1/2 text-white">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Explorez l'Alaska</h2>
           <p className="text-lg md:text-xl mb-6">

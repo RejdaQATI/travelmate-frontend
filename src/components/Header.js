@@ -15,7 +15,6 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Si la page actuelle n'est pas une page de voyage détaillée ou autre, alors on applique le scroll classique
       if (!location.pathname.startsWith('/trips/') && location.pathname !== '/reservation' && location.pathname !== '/terms') {
         if (window.scrollY > 50) {
           setIsScrolled(true);
@@ -32,7 +31,7 @@ const Header = () => {
     };
   }, [location.pathname]);
 
-  // Forcer l'état "scrolled" si on est sur une page de détail de voyage (/trips/:id), /reservation ou /terms
+  // Forcer l'état scrolled si on est sur une page de détail de voyage
   useEffect(() => {
     if (
       location.pathname.startsWith('/trips/') ||
@@ -62,16 +61,15 @@ const Header = () => {
         >
           {isScrolled ? (
             <img 
-              src="../images/logo2.png" // Remplace par le chemin correct de ton logo
+              src="../images/logo2.png" 
               alt="Logo" 
               className="h-16 w-auto" 
             />
           ) : (
-            "TravelMate" // Si pas encore scrollé, affiche le texte TravelMate en blanc
+            "TravelMate" // Si pas encore scrollé, on affiche le texte TravelMate en blanc
           )}
         </Link>
 
-        {/* Burger menu icon for small screens */}
         <div className="sm:hidden">
           <button onClick={toggleMenu} className="text-gray-800 focus:outline-none">
             <svg
@@ -86,7 +84,6 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Navigation links for large screens */}
         <nav className="hidden sm:flex space-x-6">
           <Link
             to="/"
