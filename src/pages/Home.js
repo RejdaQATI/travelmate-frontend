@@ -12,7 +12,7 @@ import CityList from '../components/CityList';
 import CityDetails from '../components/CityDetails'; 
 
 const Home = () => {
-  const [searchFilters, setSearchFilters] = useState(null);
+
   const [selectedCity, setSelectedCity] = useState(null); 
 
   return (
@@ -20,8 +20,8 @@ const Home = () => {
       <Header />
       <main>
         <HeroImage />
-        <SearchBar onSearch={setSearchFilters} />
-        <PopularTrips searchFilters={searchFilters} />
+        <SearchBar/>
+        <PopularTrips  />
         <MaldivesSection />
         <TripsSlider />
         <AlaskaSection />

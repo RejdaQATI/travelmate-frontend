@@ -8,10 +8,10 @@ import { useLocation } from 'react-router-dom';
 const Trips = () => {
   const tripsHeroImage = 'images/newyork1.png';
 
-  // Récupérer le filtre de l'URL
+  // On récupère le filtre de l'URL
   const location = useLocation();
   const query = new URLSearchParams(location.search);
-  const continent = query.get('continent');  // Récupérer le continent dans l'URL
+  const continent = query.get('continent');  // On récupère le continent dans l'URL
 
   return (
     <div>

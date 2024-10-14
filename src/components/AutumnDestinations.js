@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import axios from '../axiosConfig'; // Adapter ce chemin à ta config
+import axios from '../axiosConfig'; 
 
 const AutumnDestinations = () => {
   const [trips, setTrips] = useState([]);
 
-  // Récupérer les voyages d'automne depuis l'API
+
   useEffect(() => {
-    axios.get('/trips') // Remplace '/autumn-trips' par l'endpoint correspondant de ton API
+    axios.get('/trips') 
       .then(response => {
-        setTrips(response.data.trips); // Assurer que l'API retourne un tableau "trips"
+        setTrips(response.data.trips);
       })
       .catch(error => {
         console.error('Erreur lors de la récupération des voyages d\'automne', error);
@@ -25,7 +25,7 @@ const AutumnDestinations = () => {
       Découvrez nos suggestions pour un automne inoubliable
     </h3>
 
-    {/* Grille pour afficher les voyages */}
+
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
       {trips.length > 0 ? (
         trips.slice(0, 5).map((trip, index) => (
