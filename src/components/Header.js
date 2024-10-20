@@ -5,21 +5,28 @@ import Logout from './Logout';
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); 
+  const [isAdmin, setIsAdmin] = useState(false); 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     const token = localStorage.getItem('token'); 
+    const role = localStorage.getItem('role');  
     setIsLoggedIn(!!token);
+    if (role === 'admin') {
+      setIsAdmin(true); 
+    } else {
+      setIsAdmin(false);
+    }
   }, [isLoggedIn]);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!location.pathname.startsWith('/trips/') && location.pathname !== '/reservation' && location.pathname !== '/terms') {
+      if (!location.pathname.startsWith('/trips/') && location.pathname !== '/reservation' && location.pathname !== '/terms' && location.pathname !== '/about' && location.pathname !== '/legalmentions') {
         if (window.scrollY > 50) {
           setIsScrolled(true);
-        } else {
-          setIsScrolled(false);
+        } else if (!isMenuOpen) {
+          setIsScrolled(false); 
         }
       }
     };
@@ -29,27 +36,32 @@ const Header = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [location.pathname]);
+  }, [location.pathname, isMenuOpen]); 
 
-  // Forcer l'état scrolled si on est sur une page de détail de voyage
   useEffect(() => {
     if (
       location.pathname.startsWith('/trips/') ||
       location.pathname === '/reservation' ||
-      location.pathname === '/terms'
+      location.pathname === '/terms' ||
+      location.pathname === '/about' ||
+      location.pathname === '/legalmentions' ||
+      isMenuOpen 
     ) {
-      setIsScrolled(true); // Toujours scrolled sur ces pages
+      setIsScrolled(true); 
     }
-  }, [location.pathname]);
+  }, [location.pathname, isMenuOpen]); 
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+    if (!isMenuOpen) {
+      setIsScrolled(true);
+    }
   };
 
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md py-1' : 'bg-transparent py-4' // Changer selon si la page est scrollée ou non
+        isScrolled ? 'bg-white shadow-md py-1' : 'bg-transparent py-4' 
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center relative">
@@ -66,7 +78,7 @@ const Header = () => {
               className="h-16 w-auto" 
             />
           ) : (
-            "TravelMate" // Si pas encore scrollé, on affiche le texte TravelMate en blanc
+            "TravelMate" 
           )}
         </Link>
 
@@ -122,6 +134,17 @@ const Header = () => {
             À propos
           </Link>
 
+          {isLoggedIn && isAdmin && (  
+            <Link
+              to="/admin"
+              className={`transition duration-300 font-bold ${
+                !isScrolled ? 'text-white' : 'text-gray-700'
+              } hover:text-blue-500`}
+            >
+              Admin
+            </Link>
+          )}
+
           {isLoggedIn ? (
             <Logout setIsLoggedIn={setIsLoggedIn} isScrolled={isScrolled} />
           ) : (
@@ -171,6 +194,16 @@ const Header = () => {
               >
                 À propos
               </Link>
+
+              {isLoggedIn && isAdmin && (
+                <Link
+                  to="/admin"
+                  onClick={toggleMenu}
+                  className="text-gray-700 hover:text-blue-500 font-bold"
+                >
+                  Admin
+                </Link>
+              )}
 
               {isLoggedIn ? (
                 <Logout setIsLoggedIn={setIsLoggedIn} isScrolled={isScrolled} />

@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from '../axiosConfig';
 import { useParams, useNavigate } from 'react-router-dom';
 import TripDatePicker from './TripDatePicker';
-import Header from './Header'; // Import du Header
 
 const TripDetail = () => {
-  const { id } = useParams(); // Récupérer l'ID du voyage depuis l'URL
+  const { id } = useParams(); // Récupérer depuis l'URL
   const [trip, setTrip] = useState(null);
-  const [selectedTripDate, setSelectedTripDate] = useState(null); // Stocker la date sélectionnée
-  const navigate = useNavigate(); // Utilisé pour naviguer vers la page de réservation
+  const [selectedTripDate, setSelectedTripDate] = useState(null); 
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     axios.get(`/trips/${id}`)
@@ -22,9 +21,9 @@ const TripDetail = () => {
 
   const handleDateSelect = (selectedRange) => {
     if (selectedRange && selectedRange.id && selectedRange.price) {
-      setSelectedTripDate(selectedRange); // Mettre à jour la date sélectionnée si elle est valide
+      setSelectedTripDate(selectedRange); 
     } else {
-      setSelectedTripDate(null); // Si la sélection est invalide, la remettre à null
+      setSelectedTripDate(null); 
     }
   };
 
@@ -34,13 +33,11 @@ const TripDetail = () => {
       return;
     }
 
-    // Rediriger vers le composant Reservation avec trip_date_id
     navigate('/reservation', { state: { tripDateId: selectedTripDate.id } });
   };
 
   return (
     <>
-      <Header />
       <div className="container mx-auto px-4 py-8 flex flex-col lg:flex-row mt-16">
         {trip ? (
           <>
@@ -55,12 +52,6 @@ const TripDetail = () => {
   <h2 className="text-3xl font-semibold text-black mb-4">Détails du voyage</h2>
   <ul className="list-disc list-inside text-gray-600">
     <li><strong>Durée :</strong> {trip.duration} jours</li>
-    <li>
-      <strong>Prix : </strong> 
-      {selectedTripDate 
-        ? `${selectedTripDate.price} €`  
-        : " Sélectionnez une date pour voir le prix"}
-    </li>
   </ul>
 </section>
 

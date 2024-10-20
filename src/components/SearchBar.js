@@ -111,7 +111,7 @@ const SearchBar = () => {
           )}
         </div>
 
-        <button type="submit" className="bg-yellow-500 text-white p-2 md:p-3 rounded-lg hover:bg-yellow-600">
+        <button type="submit" className="bg-yellow-500 text-black p-2 md:p-3 rounded-lg hover:bg-yellow-600">
         
           Rechercher
         </button>

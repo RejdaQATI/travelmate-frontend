@@ -26,7 +26,6 @@ const ManageReservations = () => {
     }));
   };
 
-
   const handleSave = (id) => {
     const updatedFields = modifiedReservations[id] || {};
     const currentReservation = reservations.find(reservation => reservation.id === id);
@@ -78,88 +77,90 @@ const ManageReservations = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-6">Liste des réservations</h2>
-      <table className="table-auto w-full">
-        <thead>
-          <tr>
-            <th className="px-4 py-2">ID</th>
-            <th className="px-4 py-2">Utilisateur</th>
-            <th className="px-4 py-2">Voyage</th>
-            <th className="px-4 py-2">Participants</th>
-            <th className="px-4 py-2">Statut</th>
-            <th className="px-4 py-2">Statut Paiement</th>
-            <th className="px-4 py-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {reservations.map(reservation => (
-            <tr key={reservation.id}>
-              <td className="border px-4 py-2">{reservation.id}</td>
-              <td className="border px-4 py-2">{reservation.user?.name || 'Utilisateur inconnu'}</td>
-              <td className="border px-4 py-2">
-                {reservation.trip_date?.trip?.title || 'Voyage inconnu'}
-              </td>
-              <td className="border px-4 py-2">{reservation.number_of_participants}</td>
-              <td className="border px-4 py-2">
-                {isEditing[reservation.id] ? (
-                  <select
-                    value={modifiedReservations[reservation.id]?.status || reservation.status}
-                    onChange={(e) => handleChange(reservation.id, 'status', e.target.value)}
-                    className="border px-2 py-1"
-                  >
-                    <option value="pending">En attente</option>
-                    <option value="confirmed">Confirmé</option>
-                    <option value="cancelled">Annulé</option>
-                  </select>
-                ) : (
-                  <span>{reservation.status}</span>
-                )}
-              </td>
-              <td className="border px-4 py-2">
-                {isEditing[reservation.id] ? (
-                  <select
-                    value={modifiedReservations[reservation.id]?.payment_status || reservation.payment_status}
-                    onChange={(e) => handleChange(reservation.id, 'payment_status', e.target.value)}
-                    className="border px-2 py-1"
-                  >
-                    <option value="pending">En attente</option>
-                    <option value="paid">Payé</option>
-                    <option value="failed">Échec</option>
-                  </select>
-                ) : (
-                  <span>{reservation.payment_status}</span>
-                )}
-              </td>
-
-              <td className="border px-4 py-2">
-                {isEditing[reservation.id] ? (
-                  <button
-                    className="bg-gray-500 text-white px-4 py-2 rounded-lg"
-                    onClick={() => handleSave(reservation.id)}
-                  >
-                    Sauvegarder
-                  </button>
-                ) : (
-                  <>
-                    <button
-                      className="bg-gray-500 text-white px-4 py-2 rounded-lg mr-2"
-                      onClick={() => handleEdit(reservation.id)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="bg-red-500 text-white px-4 py-2 rounded-lg"
-                      onClick={() => handleDelete(reservation.id)}
-                    >
-                      &#10005; 
-                    </button>
-                  </>
-                )}
-              </td>
+      <h2 className="text-lg md:text-2xl font-bold mb-6">Liste des réservations</h2>
+      <div className="overflow-x-auto">
+        <table className="table-auto w-full text-xs md:text-lg">
+          <thead>
+            <tr>
+              <th className="px-2 py-1 md:px-4 md:py-2">ID</th>
+              <th className="px-2 py-1 md:px-4 md:py-2">Utilisateur</th>
+              <th className="px-2 py-1 md:px-4 md:py-2">Voyage</th>
+              <th className="px-2 py-1 md:px-4 md:py-2">Participants</th>
+              <th className="px-2 py-1 md:px-4 md:py-2">Statut</th>
+              <th className="px-2 py-1 md:px-4 md:py-2">Statut Paiement</th>
+              <th className="px-2 py-1 md:px-4 md:py-2">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {reservations.map(reservation => (
+              <tr key={reservation.id}>
+                <td className="border px-2 py-1 md:px-4 md:py-2">{reservation.id}</td>
+                <td className="border px-2 py-1 md:px-4 md:py-2">{reservation.user?.name || 'Utilisateur inconnu'}</td>
+                <td className="border px-2 py-1 md:px-4 md:py-2">
+                  {reservation.trip_date?.trip?.title || 'Voyage inconnu'}
+                </td>
+                <td className="border px-2 py-1 md:px-4 md:py-2">{reservation.number_of_participants}</td>
+                <td className="border px-2 py-1 md:px-4 md:py-2">
+                  {isEditing[reservation.id] ? (
+                    <select
+                      value={modifiedReservations[reservation.id]?.status || reservation.status}
+                      onChange={(e) => handleChange(reservation.id, 'status', e.target.value)}
+                      className="border px-1 py-1 md:px-2 md:py-1"
+                    >
+                      <option value="en attente">En attente</option>
+                      <option value="confirmé">Confirmé</option>
+                      <option value="annulé">Annulé</option>
+                    </select>
+                  ) : (
+                    <span>{reservation.status}</span>
+                  )}
+                </td>
+                <td className="border px-2 py-1 md:px-4 md:py-2">
+                  {isEditing[reservation.id] ? (
+                    <select
+                      value={modifiedReservations[reservation.id]?.payment_status || reservation.payment_status}
+                      onChange={(e) => handleChange(reservation.id, 'payment_status', e.target.value)}
+                      className="border px-1 py-1 md:px-2 md:py-1"
+                    >
+                      <option value="en attente">En attente</option>
+                      <option value="payé">Payé</option>
+                      <option value="échoué">Échec</option>
+                    </select>
+                  ) : (
+                    <span>{reservation.payment_status}</span>
+                  )}
+                </td>
+
+                <td className="border px-2 py-1 md:px-4 md:py-2">
+                  {isEditing[reservation.id] ? (
+                    <button
+                      className="bg-gray-500 text-white px-2 py-1 md:px-4 md:py-2 rounded-lg"
+                      onClick={() => handleSave(reservation.id)}
+                    >
+                      Sauvegarder
+                    </button>
+                  ) : (
+                    <>
+                      <button
+                        className="bg-gray-500 text-white px-2 py-1 md:px-4 md:py-2 ml-2 md:ml-4 rounded-lg hover:bg-gray-600 transition duration-300"
+                        onClick={() => handleEdit(reservation.id)}
+                      >
+                        &#9998;
+                      </button>
+                      <button
+                        className="bg-red-500 text-white px-2 py-1 md:px-4 md:py-2 rounded-lg ml-2"
+                        onClick={() => handleDelete(reservation.id)}
+                      >
+                        &#10005;
+                      </button>
+                    </>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

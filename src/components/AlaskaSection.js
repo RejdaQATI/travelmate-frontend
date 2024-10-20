@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from '../axiosConfig'; 
 
 const AlaskaSection = () => {
+  const [alaskaTrip, setAlaskaTrip] = useState(null);
+
+  useEffect(() => {
+    axios.get('/trips')
+      .then(response => {
+        const trip = response.data.trips.find(trip => trip.title.includes('Alaska'));
+        setAlaskaTrip(trip); 
+      })
+      .catch(error => {
+        console.error('Erreur lors de la récupération des informations du voyage en Alaska', error);
+      });
+  }, []);
+
+  if (!alaskaTrip) {
+    return <p>Chargement des informations sur l'Alaska...</p>; 
+  }
+
   return (
     <div
       className="relative bg-cover bg-center h-[550px] flex items-center"
       style={{ backgroundImage: "url('images/alaska-bg.png')" }} 
     >
-
       <div className="relative z-10 container mx-auto px-4 flex items-center justify-between">
         <div className="w-1/2 hidden md:flex justify-center items-center">
           <img
@@ -24,8 +41,8 @@ const AlaskaSection = () => {
             Partez à l'aventure dans cette destination extraordinaire et vivez une expérience inoubliable.
           </p>
           <a
-            href="/trips/alaska"
-            className="inline-block bg-yellow-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-yellow-600 transition duration-300"
+            href={`/trips/${alaskaTrip.id}`}
+            className="inline-block bg-yellow-500 text-black px-6 py-3 rounded-lg shadow-lg hover:bg-yellow-600 transition duration-300"
           >
             Découvrez nos voyages en Alaska
           </a>

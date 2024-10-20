@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import api from '../axiosConfig';
 import '../assets/css/LoginForm.css'; 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import planeImage from '../assets/images/travelmate-plane.png'; 
 import cloudImage from '../assets/images/clouds.png'; 
 import cloud2Image from '../assets/images/clouds-2.png'; 
+import Register from '../pages/Register';
 
 const LoginForm = () => { 
   const [email, setEmail] = useState('');
@@ -71,7 +72,7 @@ const LoginForm = () => {
             </button>
           </div>
           <div className="mt-4 text-center">
-            <a href="#" className="text-gray-500 hover:underline">Mot de passe oublié ?</a>
+            <p className="text-gray-500">Vous n'avez pas de compte ? <Link to="/Register" className="text-blue-500 hover:underline">Inscrivez-vous</Link></p>
           </div>
         </form>
       </div>

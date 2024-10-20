@@ -28,9 +28,9 @@ const PopularTrips = () => {
       </div>
 
       <div className="container mx-auto py-4 relative">
-        <div className="hide-scrollbar relative flex w-full snap-x snap-mandatory justify-start items-start overflow-x-auto scroll-smooth ml-1 overflow-y-hidden">
+        <div className="hide-scrollbar relative flex w-full snap-x snap-mandatory justify-start lg:justify-center items-start overflow-x-auto scroll-smooth ml-1 overflow-y-hidden">
           {popularTrips.map(trip => (
-            <Link key={trip.id} to={`/trips/${trip.id}`} className="card-dimension h-full shrink-0 snap-center scroll-ml-4 pr-4 last:scroll-mr-4">
+            <Link key={trip.id} to={`/trips/${trip.id}`} className="card-dimension h-full shrink-0 snap-center scroll-ml-4">
               <div className="w-[220px] sm:w-[220px] m-2 bg-white rounded-lg shadow-lg overflow-hidden">
                 <img
                   src={`${trip.image}`}

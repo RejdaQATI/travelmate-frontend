@@ -54,13 +54,6 @@ const TripDatePicker = ({ tripId, onDateSelect }) => {
         }
         selectRange={false}
       />
-
-      {selectedRange && (
-        <div className="mt-4">
-          <p>Période sélectionnée : {selectedRange.start.toLocaleDateString()} - {selectedRange.end.toLocaleDateString()}</p>
-          <p>Prix : {selectedRange.price} €</p>
-        </div>
-      )}
     </div>
   );
 };

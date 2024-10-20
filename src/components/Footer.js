@@ -7,33 +7,33 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <h2 className="text-xl font-semibold mb-4">À propos de nous</h2>
-            <p className="text-gray-400">
+            <p className="text-gray-300">
               Travel Mate est une agence de voyages dédiée à vous offrir les meilleures expériences de voyage partout dans le monde. Notre équipe est passionnée par les découvertes et les aventures uniques.
             </p>
           </div>
 
           <div>
             <h2 className="text-xl font-semibold mb-4">Liens rapides</h2>
-            <ul className="space-y-2 text-gray-400">
+            <ul className="space-y-2 text-gray-300">
               <li><a href="/about" className="hover:text-white">À propos</a></li>
-              <li><a href="/destinations" className="hover:text-white">Destinations</a></li>
-              <li><a href="/contact" className="hover:text-white">Contact</a></li>
-              <li><a href="/privacy" className="hover:text-white">Politique de confidentialité</a></li>
+              <li><a href="/trips" className="hover:text-white">Destinations</a></li>
+              <li><a href="/legalmentions" className="hover:text-white">Mentions Legales</a></li>
+              <li><a href="/terms" className="hover:text-white">Conditions générales de vente</a></li>
             </ul>
           </div>
 
           <div>
             <h2 className="text-xl font-semibold mb-4">Contactez-nous</h2>
-            <ul className="space-y-2 text-gray-400">
-              <li>Email: contact@travelmate.com</li>
-              <li>Téléphone: +33 1 23 45 67 89</li>
-              <li>Adresse: 123 Rue des Voyages, Paris, France</li>
+            <ul className="space-y-2 text-gray-300">
+              <li>Email: travelmate@gmail.com</li>
+              <li>Téléphone: +33 12345678</li>
+              <li>Adresse: Paris, France</li>
             </ul>
           </div>
 
           <div>
             <h2 className="text-xl font-semibold mb-4">Suivez-nous</h2>
-            <ul className="flex space-x-4 text-gray-400">
+            <ul className="flex space-x-4 text-gray-300">
               <li><a href="https://facebook.com" className="hover:text-white">Facebook</a></li>
               <li><a href="https://instagram.com" className="hover:text-white">Instagram</a></li>
               <li><a href="https://twitter.com" className="hover:text-white">Twitter</a></li>

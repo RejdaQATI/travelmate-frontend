@@ -33,7 +33,7 @@ const TripList = ({ initialContinent }) => {
 
   return (
     <div>
-      <div className="flex justify-center space-x-4 mb-6 mt-4">
+      <div className="flex justify-center space-x-2 sm:space-x-4 mb-4 sm:mb-6 mt-2 sm:mt-4">
         {['Europe', 'Amérique', 'Afrique', 'Asie', 'Australie'].map(continent => (
           <button
             key={continent}

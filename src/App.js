@@ -6,13 +6,14 @@ import Register from './pages/Register';
 import Trips from './pages/Trips';
 import Profile from './pages/Profile';
 import About from './pages/About'; 
-import TripDetail from './components/TripDetail'; 
+import ShowTrip from './pages/ShowTrip'; 
 import Reservation from './pages/Reservations'; 
 import AdminDashboard from './components/AdminDashboard'; 
 import ProtectedRoute from './components/ProtectedRoute';
 import UpdateTrip from './components/UpdateTrip';  
 import AddTrip from './components/AddTrip'; 
 import TermsAndConditions from './components/TermsAndConditions';  
+import LegalMentions from './components/LegalMentions';  
 
 function App() {
   return (
@@ -23,8 +24,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/trips" element={<Trips />} />
         <Route path="/about" element={<About />} /> 
-        <Route path="/trips/:id" element={<TripDetail />} />
+        <Route path="/trips/:id" element={<ShowTrip />} />
         <Route path="/terms" element={<TermsAndConditions />} />
+        <Route path="/legalmentions" element={<LegalMentions />} />
 
         <Route
           path="/profile"
